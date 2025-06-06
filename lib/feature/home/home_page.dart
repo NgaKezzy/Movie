@@ -151,6 +151,8 @@ class _HomePageState extends State<HomePage> {
                         child: CustomScrollView(
                           controller: _scrollController,
                           slivers: [
+
+                            // giao diện slider phim
                             homePageCubitWatch.state.isLoadingHome
                                 ? const SkeletonMovieCard()
                                 : SliverToBoxAdapter(
@@ -187,6 +189,7 @@ class _HomePageState extends State<HomePage> {
                                             ))
                                         : const SizedBox(),
                                   ),
+                                  // giao diện các nút chấm 
                             homePageCubitWatch.state.isLoadingHome
                                 ? const SkeletonPageIndicator()
                                 : SliverToBoxAdapter(

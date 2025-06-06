@@ -64,6 +64,20 @@ class _SearchMovieState extends State<SearchMovie> {
                             cursorColor: theme.colorScheme.onPrimary,
                             autofocus: true,
                             controller: searchController,
+                            onSubmitted: (value) async {
+                              if (searchController.text.trim().isNotEmpty) {
+                                setState(() {
+                                  isPlaySearch = true;
+                                });
+                                FocusScope.of(context).unfocus();
+                                await movieCubit
+                                    .moviesSearch(searchController.text.trim());
+                                isPlaySearch = false;
+                                isFirst = false;
+
+                                setState(() {});
+                              }
+                            },
                             onChanged: (value) {
                               // Hàm để gọi để tìm kiếm
                               debounce.call(() async {

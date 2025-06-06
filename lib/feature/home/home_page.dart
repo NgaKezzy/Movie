@@ -7,10 +7,6 @@ import 'package:app/feature/home/cubit/movie_state.dart';
 import 'package:app/feature/home/widgets/item_film_horizontally.dart';
 import 'package:app/feature/home/widgets/item_grid_and_title.dart';
 import 'package:app/feature/home/widgets/item_slider_image.dart';
-import 'package:app/feature/home/widgets/skeleton_card.dart';
-import 'package:app/feature/home/widgets/skeleton_item_film_horizontal.dart';
-import 'package:app/feature/home/widgets/skeleton_item_grid_and_title.dart';
-import 'package:app/feature/home/widgets/skeleton_page_indicator.dart';
 import 'package:app/routers/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -151,97 +147,81 @@ class _HomePageState extends State<HomePage> {
                         child: CustomScrollView(
                           controller: _scrollController,
                           slivers: [
-
                             // giao diện slider phim
-                            homePageCubitWatch.state.isLoadingHome
-                                ? const SkeletonMovieCard()
-                                : SliverToBoxAdapter(
-                                    child: state.movies.isNotEmpty
-                                        ? Container(
-                                            margin:
-                                                const EdgeInsets.only(top: 8),
-                                            height: height * 0.23,
-                                            width: width,
-                                            child: PageView.builder(
-                                              scrollDirection: Axis.horizontal,
-                                              controller: _pageController,
-                                              padEnds: false,
-                                              itemCount: state.movies.length,
-                                              itemBuilder: (context, index) {
-                                                return SizedBox(
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width,
-                                                  child: ItemSliderImage(
-                                                    imageUrl: state
-                                                        .movies[index]
-                                                        .thumb_url,
-                                                    onTap: () {
-                                                      context.push(
-                                                          '${AppRouteConstant.myHomeApp}${AppRouteConstant.watchAVideo}',
-                                                          extra: state
-                                                              .movies[index]
-                                                              .slug);
-                                                    },
-                                                  ),
-                                                );
+                            SliverToBoxAdapter(
+                              child: state.movies.isNotEmpty
+                                  ? Container(
+                                      margin: const EdgeInsets.only(top: 8),
+                                      height: height * 0.23,
+                                      width: width,
+                                      child: PageView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        controller: _pageController,
+                                        padEnds: false,
+                                        itemCount: state.movies.length,
+                                        itemBuilder: (context, index) {
+                                          return SizedBox(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            child: ItemSliderImage(
+                                              imageUrl:
+                                                  state.movies[index].thumb_url,
+                                              onTap: () {
+                                                context.push(
+                                                    '${AppRouteConstant.myHomeApp}${AppRouteConstant.watchAVideo}',
+                                                    extra: state
+                                                        .movies[index].slug);
                                               },
-                                            ))
-                                        : const SizedBox(),
-                                  ),
-                                  // giao diện các nút chấm 
-                            homePageCubitWatch.state.isLoadingHome
-                                ? const SkeletonPageIndicator()
-                                : SliverToBoxAdapter(
-                                    child: Center(
-                                      child: state.movies.isNotEmpty
-                                          ? Column(
-                                              children: [
-                                                const SizedBox(
-                                                  height: 10,
-                                                ),
-                                                SmoothPageIndicator(
-                                                    controller:
-                                                        _pageController, // PageController
-                                                    count: state.movies.length,
-                                                    effect: ExpandingDotsEffect(
-                                                        dotWidth: 10,
-                                                        dotHeight: 10,
-                                                        activeDotColor: theme
-                                                            .colorScheme
-                                                            .onPrimary), // your preferred effect
-                                                    onDotClicked: (index) {}),
-                                              ],
-                                            )
-                                          : const SizedBox(),
-                                    ),
-                                  ),
+                                            ),
+                                          );
+                                        },
+                                      ))
+                                  : const SizedBox(),
+                            ),
+                            // giao diện các nút chấm
+                            SliverToBoxAdapter(
+                              child: Center(
+                                child: state.movies.isNotEmpty
+                                    ? Column(
+                                        children: [
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          SmoothPageIndicator(
+                                              controller:
+                                                  _pageController, // PageController
+                                              count: state.movies.length,
+                                              effect: ExpandingDotsEffect(
+                                                  dotWidth: 10,
+                                                  dotHeight: 10,
+                                                  activeDotColor: theme
+                                                      .colorScheme
+                                                      .onPrimary), // your preferred effect
+                                              onDotClicked: (index) {}),
+                                        ],
+                                      )
+                                    : const SizedBox(),
+                              ),
+                            ),
 
                             /// phim lẻ
-                            homePageCubitWatch.state.isLoadingHome
-                                ? SkeletonItemGridAndTitle(
-                                    title: app?.singleMovie ?? '')
-                                : ItemGridAndTitle(
-                                    itemFilms: state.singleMovies,
-                                    title: app?.singleMovie ?? '',
-                                  ),
+                            ItemGridAndTitle(
+                              itemFilms: state.singleMovies,
+                              title: app?.singleMovie ?? '',
+                            ),
 
                             /// phim hoạt hình
-                            homePageCubitWatch.state.isLoadingHome
-                                ? const SkeletonItemFilmHorizontal()
-                                : ItemFilmHorizontally(
-                                    itemsFilm: state.cartoon,
-                                    title: app?.cartoon ?? '',
-                                    color: theme.colorScheme.tertiary),
+                            ItemFilmHorizontally(
+                                itemsFilm: state.cartoon,
+                                title: app?.cartoon ?? '',
+                                color: theme.colorScheme.tertiary),
 
                             ///phim bộ
-                            homePageCubitWatch.state.isLoadingHome
-                                ? SkeletonItemGridAndTitle(
-                                    title: app?.seriesMovie ?? '')
-                                : ItemGridAndTitle(
-                                    itemFilms: state.seriesMovies,
-                                    title: app?.seriesMovie ?? '',
-                                  ),
+                            ItemGridAndTitle(
+                              itemFilms: state.seriesMovies,
+                              title: app?.seriesMovie ?? '',
+                            ),
                             const SliverToBoxAdapter(
                               child: SizedBox(height: 30),
                             )

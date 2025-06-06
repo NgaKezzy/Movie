@@ -52,8 +52,7 @@ dependencies:
   bloc: any
   chewie: ^1.8.5
   get_it: ^8.0.3
-  skeletonizer: ^1.4.2
-  skeletons: ^0.0.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

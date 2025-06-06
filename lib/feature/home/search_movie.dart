@@ -71,7 +71,7 @@ class _SearchMovieState extends State<SearchMovie> {
                             setState(() {
                               isPlaySearch = true;
                             });
-                            FocusScope.of(context).unfocus();
+
                             await movieCubit
                                 .moviesSearch(searchController.text.trim());
                             isPlaySearch = false;

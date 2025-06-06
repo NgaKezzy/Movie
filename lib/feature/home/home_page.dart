@@ -249,6 +249,7 @@ AppBar _appBar(BuildContext context, ScrollController scrollController) {
       children: [
         GestureDetector(
           onTap: () {
+            // chỗ này là khi nào nhấn vào logo thì sẽ cuộn về đầu trang
             scrollController.animateTo(0.0,
                 duration: const Duration(milliseconds: 500),
                 curve: Curves.easeInOut);

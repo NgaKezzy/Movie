@@ -65,6 +65,7 @@ class _SearchMovieState extends State<SearchMovie> {
                         cursorColor: theme.colorScheme.onPrimary,
                         autofocus: true,
                         controller: searchController,
+                        // chỗ này là khi nào nhấn done mới tìm kiếm
                         onFieldSubmitted: (value) async {
                           if (searchController.text.trim().isNotEmpty) {
                             setState(() {

@@ -111,7 +111,10 @@ class SettingsPage extends StatelessWidget {
                   onTap: () {
                     _showMyDialog(context);
                   },
-                )
+                ),
+                ElevatedButton(
+                    onPressed: () => authCubit.logout(context),
+                    child: Text('Đăng xuất'))
               ],
             );
           },

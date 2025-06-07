@@ -27,7 +27,7 @@ void main() async {
       statusBarColor: Colors.transparent,
     ),
   );
-    final directory = await getApplicationDocumentsDirectory();
+  final directory = await getApplicationDocumentsDirectory();
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: HydratedStorageDirectory(directory.path),
   );
@@ -37,14 +37,7 @@ void main() async {
   await setup();
   await Firebase.initializeApp();
   await FirebaseApi().initNotifications();
-  // await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
-  //   alert: true,
-  //   badge: true,
-  //   sound: true,
-  // );
-  // FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
 
-  // Bloc.observer = MyBlocObserver();
   runApp(
     MultiBlocProvider(
       providers: [
@@ -96,7 +89,7 @@ class _MyAppState extends State<MyApp> {
           ? 'en'
           : localeCubitWatch.state.languageCode),
       // kiểm tra xem biến true hay false rồi sẽ gán file màu tương ứng
-      theme: themeCubit.state.isDark ? dark : light, 
+      theme: themeCubit.state.isDark ? dark : light,
       routerConfig: AppRoutes().router,
     );
   }

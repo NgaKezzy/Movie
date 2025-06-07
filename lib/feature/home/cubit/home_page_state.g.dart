@@ -24,11 +24,11 @@ abstract class _$HomePageStateCWProxy {
   /// HomePageState(...).copyWith(id: 12, name: "My name")
   /// ````
   HomePageState call({
-    bool? isConnectNetwork,
-    HomePageStatus? status,
-    bool? isLoadingHome,
-    int? currentIndexPage,
-    bool? isNotification,
+    bool isConnectNetwork,
+    HomePageStatus status,
+    bool isLoadingHome,
+    int currentIndexPage,
+    bool isNotification,
   });
 }
 
@@ -73,27 +73,23 @@ class _$HomePageStateCWProxyImpl implements _$HomePageStateCWProxy {
     Object? isNotification = const $CopyWithPlaceholder(),
   }) {
     return HomePageState(
-      isConnectNetwork: isConnectNetwork == const $CopyWithPlaceholder() ||
-              isConnectNetwork == null
+      isConnectNetwork: isConnectNetwork == const $CopyWithPlaceholder()
           ? _value.isConnectNetwork
           // ignore: cast_nullable_to_non_nullable
           : isConnectNetwork as bool,
-      status: status == const $CopyWithPlaceholder() || status == null
+      status: status == const $CopyWithPlaceholder()
           ? _value.status
           // ignore: cast_nullable_to_non_nullable
           : status as HomePageStatus,
-      isLoadingHome:
-          isLoadingHome == const $CopyWithPlaceholder() || isLoadingHome == null
-              ? _value.isLoadingHome
-              // ignore: cast_nullable_to_non_nullable
-              : isLoadingHome as bool,
-      currentIndexPage: currentIndexPage == const $CopyWithPlaceholder() ||
-              currentIndexPage == null
+      isLoadingHome: isLoadingHome == const $CopyWithPlaceholder()
+          ? _value.isLoadingHome
+          // ignore: cast_nullable_to_non_nullable
+          : isLoadingHome as bool,
+      currentIndexPage: currentIndexPage == const $CopyWithPlaceholder()
           ? _value.currentIndexPage
           // ignore: cast_nullable_to_non_nullable
           : currentIndexPage as int,
-      isNotification: isNotification == const $CopyWithPlaceholder() ||
-              isNotification == null
+      isNotification: isNotification == const $CopyWithPlaceholder()
           ? _value.isNotification
           // ignore: cast_nullable_to_non_nullable
           : isNotification as bool,

@@ -13,6 +13,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
 String language = 'vi';
 void main() async {
@@ -24,6 +26,10 @@ void main() async {
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ),
+  );
+    final directory = await getApplicationDocumentsDirectory();
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: HydratedStorageDirectory(directory.path),
   );
   await Hive.initFlutter('dev_box');
   await LocalStorage.hiveRegisterAdapter();

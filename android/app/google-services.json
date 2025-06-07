@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "856710108082",
+    "firebase_url": "https://my-film-af367-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "my-film-af367",
     "storage_bucket": "my-film-af367.firebasestorage.app"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.example.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "856710108082-0kjsk740q15dua06c8ap2bti6hi2icfo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.app",
+            "certificate_hash": "1fecaccebe2d73e21b7d8288895c5e070ef6a5ce"
+          }
+        },
+        {
+          "client_id": "856710108082-4c78hgfcn60grg24o6l98n4rici5qcc0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyD9ijbxeeckEHi65171SrnxaJU9y5TaTIw"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "856710108082-4c78hgfcn60grg24o6l98n4rici5qcc0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

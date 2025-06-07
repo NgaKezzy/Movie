@@ -3,9 +3,12 @@ import 'package:app/component/item_setting.dart';
 import 'package:app/config/app_size.dart';
 import 'package:app/config/di.dart';
 import 'package:app/feature/home/cubit/movie_cubit.dart';
+import 'package:app/feature/login/cubit/auth_cubit.dart';
+import 'package:app/feature/login/cubit/auth_state.dart';
 import 'package:app/feature/setting/select_language.dart';
 import 'package:app/routers/router.dart';
 import 'package:app/theme/cubit/theme_cubit.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -14,7 +17,9 @@ import 'package:go_router/go_router.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+  SettingsPage({super.key});
+
+  AuthCubit authCubit = di.get();
 
   @override
   Widget build(BuildContext context) {
@@ -27,66 +32,89 @@ class SettingsPage extends StatelessWidget {
       onWillPop: () async => false,
       child: Scaffold(
         appBar: HeaderApp(title: AppLocalizations.of(context)!.setting),
-        body: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              height: 60,
-              width: width,
-              // color: Colors.red,\
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
+        body: BlocBuilder<AuthCubit, AuthState>(
+          builder: (context, state) {
+            return Column(
+              children: [
+                SizedBox(
+                  height: 16,
+                ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(50),
+                  child: Container(
+                    height: 100,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                    ),
+                    child: CachedNetworkImage(
+                        imageUrl: state.userInfo?.photoUrl ?? ''),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(state.userInfo?.name ?? ''),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  height: 60,
+                  width: width,
+                  // color: Colors.red,\
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      themeCubit.state.isDark
-                          ? SvgPicture.asset('assets/icons/moon.svg',
-                              color: theme.onPrimary)
-                          : SvgPicture.asset('assets/icons/sun.svg',
-                              color: theme.onPrimary),
-                      const SizedBox(
-                        width: AppSize.size10,
+                      Row(
+                        children: [
+                          themeCubit.state.isDark
+                              ? SvgPicture.asset('assets/icons/moon.svg',
+                                  color: theme.onPrimary)
+                              : SvgPicture.asset('assets/icons/sun.svg',
+                                  color: theme.onPrimary),
+                          const SizedBox(
+                            width: AppSize.size10,
+                          ),
+                          Text(app!.darkMode),
+                        ],
                       ),
-                      Text(app!.darkMode),
+                      Switch(
+                        // This bool value toggles the switch.
+                        value: themeCubit.state.isDark,
+                        activeColor: Colors.red,
+                        onChanged: (bool value) {
+                          // chỗ này nhấn nút để gọi hàm thay đổi chế độ sáng tối
+                          context.read<ThemeCubit>().toggedTheme();
+                        },
+                      )
                     ],
                   ),
-                  Switch(
-                    // This bool value toggles the switch.
-                    value: themeCubit.state.isDark,
-                    activeColor: Colors.red,
-                    onChanged: (bool value) {
-                      // chỗ này nhấn nút để gọi hàm thay đổi chế độ sáng tối
-                      context.read<ThemeCubit>().toggedTheme();
-                    },
-                  )
-                ],
-              ),
-            ),
-            ItemSetting(
-              path: 'assets/icons/global.svg',
-              text: app.language,
-              onTap: () {
-                Navigator.push(
-                    context,
-                    SwipeablePageRoute(
-                        builder: (context) => const SelectLanguage()));
-              },
-            ),
-            ItemSetting(
-              path: 'assets/icons/bookmark.svg',
-              text: app.viewHistory,
-              onTap: () {
-                context.push(AppRouteConstant.viewHistory);
-              },
-            ),
-            ItemSetting(
-              path: 'assets/icons/trash.svg',
-              text: app.clearCache,
-              onTap: () {
-                _showMyDialog(context);
-              },
-            )
-          ],
+                ),
+                ItemSetting(
+                  path: 'assets/icons/global.svg',
+                  text: app.language,
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        SwipeablePageRoute(
+                            builder: (context) => const SelectLanguage()));
+                  },
+                ),
+                ItemSetting(
+                  path: 'assets/icons/bookmark.svg',
+                  text: app.viewHistory,
+                  onTap: () {
+                    context.push(AppRouteConstant.viewHistory);
+                  },
+                ),
+                ItemSetting(
+                  path: 'assets/icons/trash.svg',
+                  text: app.clearCache,
+                  onTap: () {
+                    _showMyDialog(context);
+                  },
+                )
+              ],
+            );
+          },
         ),
       ),
     );

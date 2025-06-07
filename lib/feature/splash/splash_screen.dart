@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:app/config/di.dart';
+import 'package:app/feature/login/cubit/auth_cubit.dart';
 import 'package:app/routers/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,6 +17,8 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final AuthCubit authCubit = di.get();
+
   @override
   void initState() {
     super.initState();
@@ -30,7 +34,11 @@ class _SplashScreenState extends State<SplashScreen> {
     );
 
     Timer(const Duration(seconds: 3), () {
-      context.go(AppRouteConstant.myHomeApp);
+      if (authCubit.state.isLogin) {
+        context.go(AppRouteConstant.myHomeApp);
+      } else {
+        context.go(AppRouteConstant.login);
+      }
     });
   }
 

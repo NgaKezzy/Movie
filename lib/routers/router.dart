@@ -2,6 +2,8 @@ import 'package:app/config/di.dart';
 import 'package:app/feature/home/cubit/movie_cubit.dart';
 import 'package:app/feature/home/search_movie.dart';
 import 'package:app/feature/home/watch_a_movie.dart';
+import 'package:app/feature/login/cubit/auth_cubit.dart';
+import 'package:app/feature/login/login_page.dart';
 import 'package:app/feature/setting/view_history.dart';
 import 'package:app/feature/splash/splash_screen.dart';
 import 'package:app/my_home_app.dart';
@@ -14,7 +16,7 @@ class AppRouteConstant {
   AppRouteConstant._();
 
   static const String initial = '/';
-
+  static const String login = '/login';
   static const String myHomeApp = '/my-home-app';
   // cấp 1 của myHomeApp
   static const String watchAVideo = '/watch-a-video';
@@ -42,9 +44,24 @@ class AppRoutes {
       GoRoute(
         path: AppRouteConstant.initial,
         builder: (BuildContext context, GoRouterState state) =>
+            MultiBlocProvider(
+          providers: [
             BlocProvider<MovieCubit>.value(
-          value: di.get<MovieCubit>(),
+              value: di.get<MovieCubit>(),
+            ),
+            BlocProvider.value(
+              value: di.get<AuthCubit>(),
+            ),
+          ],
           child: const SplashScreen(),
+        ),
+      ),
+      GoRoute(
+        path: AppRouteConstant.login,
+        builder: (BuildContext context, GoRouterState state) =>
+            BlocProvider<AuthCubit>.value(
+          value: di.get<AuthCubit>(),
+          child: LoginPage(),
         ),
       ),
       GoRoute(

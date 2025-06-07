@@ -24,15 +24,12 @@ class _SelectLanguageState extends State<SelectLanguage> {
     final theme = Theme.of(context);
     return Scaffold(
       // backgroundColor: theme.colorScheme.background,
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.selectLanguage),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          HeaderTitleApp(
-            title: AppLocalizations.of(context)!.selectLanguage,
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
           Expanded(
             child: BlocBuilder<LocaleCubit, LocaleState>(
               builder: (context, state) {

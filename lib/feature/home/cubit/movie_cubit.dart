@@ -10,6 +10,7 @@ import 'package:app/feature/home/network/fetch_api_movie.dart';
 import 'package:bloc/bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:translator/translator.dart';
+import 'dart:math';
 
 class MovieCubit extends Cubit<MovieState> {
   MovieCubit() : super(const MovieState()) {
@@ -21,9 +22,10 @@ class MovieCubit extends Cubit<MovieState> {
 
   Future<void> getMovie() async {
     // hàm này để lấy thông tin các bộ phim mới nhất
-
     emit(state.copyWith(status: MovieStatus.loading));
     List<MovieInformation> newMovies = [];
+
+    final random = Random();
 
     final data = await FetchApiMovie.getMovies();
 
@@ -31,6 +33,10 @@ class MovieCubit extends Cubit<MovieState> {
     for (var i = 0; i < items.length; i++) {
       final MovieInformation item;
       item = MovieInformation.fromJson(items[i]);
+
+      // Random isPremium với tỷ lệ 20%
+      item.isPremium = random.nextDouble() < 0.2;
+
       newMovies.add(item);
     }
     if (state.favoriteMovies.isNotEmpty && newMovies.isNotEmpty) {
@@ -103,6 +109,7 @@ class MovieCubit extends Cubit<MovieState> {
     // lấy danh sách các bộ phim 1 tập
     emit(state.copyWith(status: MovieStatus.loading));
     List<MovieInformation> newSingleMovie = [];
+    final random = Random();
 
     final data = await FetchApiMovie.getAListOfIndividualMovies();
 
@@ -112,6 +119,8 @@ class MovieCubit extends Cubit<MovieState> {
       item = MovieInformation.fromJson(items[i]);
       item.poster_url = 'https://img.phimapi.com/${item.poster_url}';
       item.thumb_url = 'https://img.phimapi.com/${item.thumb_url}';
+      // Random isPremium với tỷ lệ 20%
+      item.isPremium = random.nextDouble() < 0.2;
 
       newSingleMovie.add(item);
     }
@@ -134,6 +143,7 @@ class MovieCubit extends Cubit<MovieState> {
     // lấy danh sách phim nhiều tập
     emit(state.copyWith(status: MovieStatus.loading));
     List<MovieInformation> newSeriesMovies = [];
+    final Random random = Random();
 
     final data = await FetchApiMovie.getTheListOfMoviesAndSeries();
 
@@ -143,6 +153,8 @@ class MovieCubit extends Cubit<MovieState> {
       item = MovieInformation.fromJson(items[i]);
       item.poster_url = 'https://img.phimapi.com/${item.poster_url}';
       item.thumb_url = 'https://img.phimapi.com/${item.thumb_url}';
+      // Random isPremium với tỷ lệ 20%
+      item.isPremium = random.nextDouble() < 0.2;
       newSeriesMovies.add(item);
     }
     if (state.favoriteMovies.isNotEmpty && newSeriesMovies.isNotEmpty) {
@@ -164,6 +176,7 @@ class MovieCubit extends Cubit<MovieState> {
     // lấy danh sách phim hoạt hình
     emit(state.copyWith(status: MovieStatus.loading));
     List<MovieInformation> newCartoons = [];
+    final Random random = Random();
 
     final data = await FetchApiMovie.getTheListOfCartoons();
     List items = data['data']['items'];
@@ -172,6 +185,8 @@ class MovieCubit extends Cubit<MovieState> {
       item = MovieInformation.fromJson(items[i]);
       item.poster_url = 'https://img.phimapi.com/${item.poster_url}';
       item.thumb_url = 'https://img.phimapi.com/${item.thumb_url}';
+      // Random isPremium với tỷ lệ 20%
+      item.isPremium = random.nextDouble() < 0.2;
       newCartoons.add(item);
     }
 

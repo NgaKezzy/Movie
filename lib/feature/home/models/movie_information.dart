@@ -18,6 +18,7 @@ class MovieInformation {
   final int year;
 
   bool isFavorite;
+  bool isPremium;
 
   MovieInformation(
       {this.name = '',
@@ -26,6 +27,7 @@ class MovieInformation {
       this.poster_url = '',
       this.thumb_url = ' ',
       this.year = 2020,
+      this.isPremium = false,
       this.isFavorite = false});
 
   factory MovieInformation.fromJson(Map<String, dynamic> json) =>

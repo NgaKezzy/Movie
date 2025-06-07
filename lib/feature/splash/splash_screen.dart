@@ -36,6 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(const Duration(seconds: 3), () {
       if (authCubit.state.isLogin) {
         context.go(AppRouteConstant.myHomeApp);
+        authCubit.checkPremium();
       } else {
         context.go(AppRouteConstant.login);
       }

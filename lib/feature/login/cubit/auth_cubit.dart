@@ -115,6 +115,70 @@ class AuthCubit extends HydratedCubit<AuthState> {
     }
   }
 
+  Future<void> registerPremium(int day, int price) async {
+    UserInfo user = state.userInfo!;
+
+    // Kiểm tra xem người dùng đã có gói premium chưa
+    if (user.isPremium && user.premiumTerm != null) {
+      // Nếu đã có premium, cộng thêm ngày vào thời hạn hiện tại
+      user.premiumTerm = user.premiumTerm!.add(Duration(days: day));
+    } else {
+      // Nếu chưa có premium, đặt thời hạn mới từ ngày hiện tại
+      user.isPremium = true;
+      user.premiumTerm = DateTime.now().add(Duration(days: day));
+    }
+
+    // Trừ kim cương
+    user.diamond = state.userInfo!.diamond - price;
+
+    try {
+      // Sử dụng getter db thay vì FirebaseDatabase.instance
+      if (Firebase.apps.isEmpty) return;
+
+      // Lấy tham chiếu đến danh sách users
+      final usersRef = db.ref("users");
+
+      // Tìm user hiện tại trong database
+      final snapshot = await usersRef.get();
+      if (snapshot.exists) {
+        final data = snapshot.value as Map<dynamic, dynamic>;
+
+        // Tìm key của user hiện tại
+        String? userKey;
+        for (final entry in data.entries) {
+          final userData = entry.value;
+          if (userData['id'] == user.id) {
+            userKey = entry.key;
+            break;
+          }
+        }
+
+        // Nếu tìm thấy user, cập nhật thông tin
+        if (userKey != null) {
+          final userRef = db.ref("users/$userKey");
+          await userRef.update(user.toJson());
+          emit(state.copyWith(userInfo: user));
+          print('User updated successfully');
+        } else {
+          print('User not found in database');
+        }
+      }
+    } catch (e) {
+      printRed(e.toString());
+    }
+  }
+
+  Future<void> checkPremium() async {
+    UserInfo user = state.userInfo!;
+    if (user.isPremium && user.premiumTerm != null) {
+      if (user.premiumTerm!.isBefore(DateTime.now())) {
+        user.isPremium = false;
+        user.premiumTerm = null;
+        emit(state.copyWith(userInfo: user));
+      }
+    }
+  }
+
   @override
   AuthState? fromJson(Map<String, dynamic> json) {
     try {

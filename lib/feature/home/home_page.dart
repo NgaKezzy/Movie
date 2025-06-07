@@ -165,6 +165,8 @@ class _HomePageState extends State<HomePage> {
                                                 .size
                                                 .width,
                                             child: ItemSliderImage(
+                                              isPremium:
+                                                  state.movies[index].isPremium,
                                               imageUrl:
                                                   state.movies[index].thumb_url,
                                               onTap: () {
@@ -205,10 +207,13 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
 
-                            /// phim lẻ
-                            ItemGridAndTitle(
-                              itemFilms: state.singleMovies,
-                              title: app?.singleMovie ?? '',
+                            // /// phim lẻ
+                            SliverToBoxAdapter(
+                              child: ItemGridAndTitle(
+                                isScroll: false,
+                                itemFilms: state.singleMovies,
+                                title: app?.singleMovie ?? '',
+                              ),
                             ),
 
                             /// phim hoạt hình
@@ -217,11 +222,11 @@ class _HomePageState extends State<HomePage> {
                                 title: app?.cartoon ?? '',
                                 color: theme.colorScheme.tertiary),
 
-                            ///phim bộ
-                            ItemGridAndTitle(
-                              itemFilms: state.seriesMovies,
-                              title: app?.seriesMovie ?? '',
-                            ),
+                            // ///phim bộ
+                            // ItemGridAndTitle(
+                            //   itemFilms: state.seriesMovies,
+                            //   title: app?.seriesMovie ?? '',
+                            // ),
                             const SliverToBoxAdapter(
                               child: SizedBox(height: 30),
                             )

@@ -31,7 +31,9 @@ class SettingsPage extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        appBar: HeaderApp(title: AppLocalizations.of(context)!.setting),
+        appBar: AppBar(
+          title: Text(app!.setting),
+        ),
         body: BlocBuilder<AuthCubit, AuthState>(
           builder: (context, state) {
             return Column(
@@ -55,8 +57,18 @@ class SettingsPage extends StatelessWidget {
                   height: 10,
                 ),
                 Text(state.userInfo?.name ?? ''),
+                SizedBox(
+                  height: 10,
+                ),
+                ItemSetting(
+                  path: 'assets/icons/global.svg',
+                  text: 'Premium Member',
+                  onTap: () {
+                    context.push(AppRouteConstant.premium);
+                  },
+                ),
                 Container(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   height: 60,
                   width: width,
                   // color: Colors.red,\
@@ -73,7 +85,7 @@ class SettingsPage extends StatelessWidget {
                           const SizedBox(
                             width: AppSize.size10,
                           ),
-                          Text(app!.darkMode),
+                          Text(app.darkMode),
                         ],
                       ),
                       Switch(
@@ -111,6 +123,9 @@ class SettingsPage extends StatelessWidget {
                   onTap: () {
                     _showMyDialog(context);
                   },
+                ),
+                SizedBox(
+                  height: 20,
                 ),
                 ElevatedButton(
                     onPressed: () => authCubit.logout(context),

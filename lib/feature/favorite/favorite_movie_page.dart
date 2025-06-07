@@ -18,9 +18,11 @@ class FavoriteMoviePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final app = AppLocalizations.of(context);
     return Scaffold(
+      appBar: AppBar(
+        title: Text(app!.favoriteFilm),
+      ),
       body: Column(
         children: [
-          HeaderApp(title: app!.favoriteFilm),
           BlocBuilder<MovieCubit, MovieState>(
             builder: (context, state) {
               if (state.favoriteMovies.isEmpty) {

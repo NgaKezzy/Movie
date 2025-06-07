@@ -1,6 +1,7 @@
 import 'package:app/config/print_color.dart';
 import 'package:app/feature/favorite/favorite_movie_page.dart';
 import 'package:app/feature/home/home_page_provider.dart';
+import 'package:app/feature/movie_serial/movie_serial_provider.dart';
 import 'package:app/feature/setting/setting_page.dart';
 import 'package:app/feature/setting/setting_page_provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -21,6 +22,7 @@ class _MyHomeAppState extends State<MyHomeApp> {
   List<Widget> pages = [
     const HomePageProvider(),
     const FavoriteMoviePage(),
+    MovieSerialProvider(),
     const SettingPageProvider()
   ];
 
@@ -83,6 +85,17 @@ class _MyHomeAppState extends State<MyHomeApp> {
               label: app?.home,
               activeIcon: SvgPicture.asset(
                 'assets/icons/home.svg',
+                color: theme.colorScheme.onPrimary,
+              ),
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                'assets/icons/heart.svg',
+                color: theme.colorScheme.tertiary,
+              ),
+              label: app?.favorite,
+              activeIcon: SvgPicture.asset(
+                'assets/icons/heart.svg',
                 color: theme.colorScheme.onPrimary,
               ),
             ),

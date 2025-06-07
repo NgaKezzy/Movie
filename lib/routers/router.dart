@@ -4,6 +4,7 @@ import 'package:app/feature/home/search_movie.dart';
 import 'package:app/feature/home/watch_a_movie.dart';
 import 'package:app/feature/login/cubit/auth_cubit.dart';
 import 'package:app/feature/login/login_page.dart';
+import 'package:app/feature/setting/premium_screen.dart';
 import 'package:app/feature/setting/view_history.dart';
 import 'package:app/feature/splash/splash_screen.dart';
 import 'package:app/my_home_app.dart';
@@ -24,6 +25,7 @@ class AppRouteConstant {
 
   // settings
   static const String viewHistory = '/viewHistory';
+  static const String premium = '/premium';
 
   // Nested Key
   static final navigatorKeyMeansure = GlobalKey<NavigatorState>();
@@ -110,6 +112,14 @@ class AppRoutes {
             BlocProvider<MovieCubit>.value(
           value: di.get<MovieCubit>(),
           child: const ViewHistory(),
+        ),
+      ),
+      GoRoute(
+        path: AppRouteConstant.premium,
+        builder: (BuildContext context, GoRouterState state) =>
+            BlocProvider<AuthCubit>.value(
+          value: di.get<AuthCubit>(),
+          child: PremiumScreen(),
         ),
       ),
     ],

@@ -50,7 +50,9 @@ class SettingsPage extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                     child: CachedNetworkImage(
-                        imageUrl: state.userInfo?.photoUrl ?? ''),
+                      imageUrl: state.userInfo?.photoUrl ?? '',
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
                 SizedBox(

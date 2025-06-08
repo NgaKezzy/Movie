@@ -55,7 +55,7 @@ class FavoriteMoviePage extends StatelessWidget {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
                             child: CachedNetworkImage(
-                              imageUrl: state.favoriteMovies[index]!.poster_url,
+                              imageUrl: state.favoriteMovies[index]!.thumb_url,
                               imageBuilder: (context, imageProvider) =>
                                   Container(
                                 decoration: BoxDecoration(

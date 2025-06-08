@@ -19,8 +19,9 @@ class _MovieSerialState extends State<MovieSerial> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
-    movieCubit.getTheListOfMoviesAndSeries();
+if(movieCubit.state.seriesMovies.isEmpty){
+  movieCubit.getTheListOfMoviesAndSeries();
+}
   }
 
   @override

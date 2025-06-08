@@ -82,18 +82,23 @@ class MovieCubit extends Cubit<MovieState> {
               await translate(newDataFilm.movie.category[i].name);
         }
       }
+      
+      // Kiểm tra xem phim có trong danh sách yêu thích không
+      newDataFilm.movie.isFavorite = false; // Mặc định là false
       for (var movieDetails in favoriteMovieBox.values) {
         if (movieDetails.slug == newDataFilm.movie.slug) {
           newDataFilm.movie.isFavorite = true;
+          printGreen("Movie ${newDataFilm.movie.name} is in favorites");
+          break;
         }
       }
     } catch (e) {
-      print("error: $e");
+      printRed("Error in getMovieDetails: $e");
+      emit(state.copyWith(status: MovieStatus.error, dataFilm: null));
+      return;
     }
-    printGreen(newDataFilm!.movie.content);
-    emit(state.copyWith(
-      dataFilm: newDataFilm,
-    ));
+    
+    emit(state.copyWith(dataFilm: newDataFilm, status: MovieStatus.success));
   }
 
   Future<String> translate(String content) async {
@@ -234,62 +239,118 @@ class MovieCubit extends Cubit<MovieState> {
     List<MovieDetails?> itemFilms = [];
 
     Box<MovieDetails> favoriteMovieBox = Hive.box(KeyApp.FAVORITE_MOVIE_BOX);
+    printGreen("Loading favorites from storage. Total: ${favoriteMovieBox.length}");
 
-    if (favoriteMovieBox.length == 0) {
-      emit(
-        state.copyWith(
-          favoriteMovies: [],
-        ),
-      );
+    if (favoriteMovieBox.isEmpty) {
+      emit(state.copyWith(favoriteMovies: []));
     } else {
       for (int i = 0; i < favoriteMovieBox.length; i++) {
-        itemFilms.add(favoriteMovieBox.getAt(i));
+        MovieDetails? movie = favoriteMovieBox.getAt(i);
+        if (movie != null) {
+          itemFilms.add(movie);
+          printGreen("Loaded favorite: ${movie.name}");
+        }
       }
       emit(state.copyWith(favoriteMovies: itemFilms));
     }
   }
 
   Future<void> addMoviesToFavoritesList({
-    // thêm phim yêu thích và lưu xuống bộ nhớ máy
     required MovieDetails? itemFilm,
   }) async {
     emit(state.copyWith(status: MovieStatus.loading));
+    
+    // Kiểm tra xem itemFilm có null không
+    if (itemFilm == null) {
+      printRed("Error: Trying to add null movie to favorites");
+      emit(state.copyWith(status: MovieStatus.error));
+      return;
+    }
+    
     Box<MovieDetails> favoriteMovieBox = Hive.box(KeyApp.FAVORITE_MOVIE_BOX);
-    favoriteMovieBox.clear();
+    
+    // Không xóa toàn bộ box, chỉ thêm phim mới vào
+    // favoriteMovieBox.clear(); - Dòng này gây ra vấn đề
+    
     List<MovieDetails?> newFavoriteMovies = [itemFilm, ...state.favoriteMovies];
-
-    newFavoriteMovies.forEach((element) async {
-      await favoriteMovieBox.add(element!);
-    });
-
+    
+    // Thêm phim mới vào box
+    await favoriteMovieBox.add(itemFilm);
+    
+    // In ra thông tin để debug
+    printGreen("Added movie to favorites: ${itemFilm.name}");
+    printGreen("Total favorites: ${favoriteMovieBox.length}");
+    
     emit(state.copyWith(
-        favoriteMovies: newFavoriteMovies, status: MovieStatus.success));
+      favoriteMovies: newFavoriteMovies, 
+      status: MovieStatus.success
+    ));
   }
 
   Future<void> removeMoviesToFavoritesList({
-    // xóa phim yêu thích khỏi bộ nhớ máy
     required MovieDetails? itemFilm,
   }) async {
-    List<MovieDetails?> items = state.favoriteMovies;
-    for (int i = 0; i < items.length; i++) {
-      if (itemFilm!.slug == items[i]!.slug) {
-        items.removeAt(i);
+    if (itemFilm == null) {
+      printRed("Error: Trying to remove null movie from favorites");
+      return;
+    }
+    
+    emit(state.copyWith(status: MovieStatus.loading));
+    
+    // Tạo danh sách mới không bao gồm phim cần xóa
+    List<MovieDetails?> updatedFavorites = [];
+    for (var movie in state.favoriteMovies) {
+      if (movie != null && movie.slug != itemFilm.slug) {
+        updatedFavorites.add(movie);
       }
     }
-    emit(state.copyWith(favoriteMovies: items));
+    
+    // Cập nhật state
+    emit(state.copyWith(favoriteMovies: updatedFavorites));
+    
+    // Cập nhật Hive box
     Box<MovieDetails> favoriteMovieBox = Hive.box(KeyApp.FAVORITE_MOVIE_BOX);
     favoriteMovieBox.clear();
-    for (var element in items) {
-      favoriteMovieBox.add(element!);
+    
+    for (var movie in updatedFavorites) {
+      if (movie != null) {
+        await favoriteMovieBox.add(movie);
+      }
     }
+    
+    printGreen("Removed movie from favorites: ${itemFilm.name}");
+    printGreen("Total favorites after removal: ${favoriteMovieBox.length}");
+    
+    emit(state.copyWith(status: MovieStatus.success));
   }
 
   Future<void> setHeart() async {
     emit(state.copyWith(status: MovieStatus.star));
 
     DataFilm? newDataFilm = state.dataFilm;
-    newDataFilm!.movie.isFavorite = !state.dataFilm!.movie.isFavorite;
+    if (newDataFilm == null || newDataFilm.movie == null) {
+      printRed("Error: DataFilm or movie is null in setHeart");
+      emit(state.copyWith(status: MovieStatus.error));
+      return;
+    }
+    
+    // Đảo ngược trạng thái yêu thích
+    bool newFavoriteState = !newDataFilm.movie.isFavorite;
+    newDataFilm.movie.isFavorite = newFavoriteState;
+    
+    // Cập nhật trong state
     emit(state.copyWith(dataFilm: newDataFilm, status: MovieStatus.success));
+    
+    // Lưu thay đổi vào Hive
+    if (newFavoriteState) {
+      // Nếu yêu thích, thêm vào danh sách
+      await addMoviesToFavoritesList(itemFilm: newDataFilm.movie);
+    } else {
+      // Nếu bỏ yêu thích, xóa khỏi danh sách
+      await removeMoviesToFavoritesList(itemFilm: newDataFilm.movie);
+    }
+    
+    printGreen("Heart set to: $newFavoriteState for movie: ${newDataFilm.movie.name}");
   }
 
   Future<void> addToWatchHistory({required String slug}) async {

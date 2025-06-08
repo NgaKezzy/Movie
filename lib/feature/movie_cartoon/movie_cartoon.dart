@@ -19,7 +19,9 @@ class _MovieCartoonState extends State<MovieCartoon> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    movieCubit.getTheListOfCartoons();
+    if (movieCubit.state.cartoon.isEmpty) {
+      movieCubit.getTheListOfCartoons();
+    }
   }
 
   @override

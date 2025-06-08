@@ -120,16 +120,23 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                           fontSize: AppSize.size16),
                     ),
                     GestureDetector(
-                      onTap: () {
-                        if (movieCubit.state.dataFilm?.movie.isFavorite ==
+                      onTap: () async {
+                        if (context
+                                .read<MovieCubit>()
+                                .state
+                                .dataFilm
+                                ?.movie
+                                .isFavorite ==
                             false) {
-                          movieCubit.addMoviesToFavoritesList(
+                          // Thêm vào yêu thích
+                          await movieCubit.addMoviesToFavoritesList(
                               itemFilm: movieCubit.state.dataFilm?.movie);
                         } else {
-                          movieCubit.removeMoviesToFavoritesList(
+                          // Xóa khỏi yêu thích
+                          await movieCubit.removeMoviesToFavoritesList(
                               itemFilm: movieCubit.state.dataFilm?.movie);
                         }
-                        movieCubit.setHeart();
+                        await movieCubit.setHeart();
                       },
                       child: Icon(
                         Icons.favorite, // icon trái tim thêm phim yêu thích

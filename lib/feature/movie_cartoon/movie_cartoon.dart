@@ -1,26 +1,25 @@
 import 'package:app/config/di.dart';
+import 'package:flutter/material.dart';
 import 'package:app/feature/home/cubit/movie_cubit.dart';
 import 'package:app/feature/home/cubit/movie_state.dart';
 import 'package:app/feature/home/widgets/item_grid_and_title.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class MovieSerial extends StatefulWidget {
-  const MovieSerial({super.key});
+class MovieCartoon extends StatefulWidget {
+  const MovieCartoon({super.key});
 
   @override
-  State<MovieSerial> createState() => _MovieSerialState();
+  State<MovieCartoon> createState() => _MovieCartoonState();
 }
 
-class _MovieSerialState extends State<MovieSerial> {
+class _MovieCartoonState extends State<MovieCartoon> {
   final MovieCubit movieCubit = di.get();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
-    movieCubit.getTheListOfMoviesAndSeries();
+    movieCubit.getTheListOfCartoons();
   }
 
   @override
@@ -35,8 +34,8 @@ class _MovieSerialState extends State<MovieSerial> {
       body: BlocBuilder<MovieCubit, MovieState>(
         builder: (context, state) {
           return ItemGridAndTitle(
-            itemFilms: state.seriesMovies,
-            title: app?.seriesMovie ?? '',
+            itemFilms: state.cartoon,
+            title: app?.cartoon ?? '',
           );
         },
       ),

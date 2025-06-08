@@ -107,8 +107,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> initialization() async {
     movieCubit.getMovie();
     movieCubit.getAListOfIndividualMovies();
-    movieCubit.getTheListOfMoviesAndSeries();
-    movieCubit.getTheListOfCartoons();
+
   }
 
   final ScrollController _scrollController = ScrollController();

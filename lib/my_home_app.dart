@@ -1,6 +1,7 @@
 import 'package:app/config/print_color.dart';
 import 'package:app/feature/favorite/favorite_movie_page.dart';
 import 'package:app/feature/home/home_page_provider.dart';
+import 'package:app/feature/movie_cartoon/movie_cartoon_provider.dart';
 import 'package:app/feature/movie_serial/movie_serial_provider.dart';
 import 'package:app/feature/setting/setting_page.dart';
 import 'package:app/feature/setting/setting_page_provider.dart';
@@ -21,8 +22,9 @@ class _MyHomeAppState extends State<MyHomeApp> {
   int pageIndex = 0;
   List<Widget> pages = [
     const HomePageProvider(),
-    const FavoriteMoviePage(),
     MovieSerialProvider(),
+    const FavoriteMoviePage(),
+    MovieCartoonProvider(),
     const SettingPageProvider()
   ];
 
@@ -93,7 +95,7 @@ class _MyHomeAppState extends State<MyHomeApp> {
                 'assets/icons/heart.svg',
                 color: theme.colorScheme.tertiary,
               ),
-              label: app?.favorite,
+              label: app?.seriesMovie,
               activeIcon: SvgPicture.asset(
                 'assets/icons/heart.svg',
                 color: theme.colorScheme.onPrimary,
@@ -105,6 +107,17 @@ class _MyHomeAppState extends State<MyHomeApp> {
                 color: theme.colorScheme.tertiary,
               ),
               label: app?.favorite,
+              activeIcon: SvgPicture.asset(
+                'assets/icons/heart.svg',
+                color: theme.colorScheme.onPrimary,
+              ),
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                'assets/icons/heart.svg',
+                color: theme.colorScheme.tertiary,
+              ),
+              label: app?.cartoon,
               activeIcon: SvgPicture.asset(
                 'assets/icons/heart.svg',
                 color: theme.colorScheme.onPrimary,

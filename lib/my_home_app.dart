@@ -92,12 +92,14 @@ class _MyHomeAppState extends State<MyHomeApp> {
             ),
             BottomNavigationBarItem(
               icon: SvgPicture.asset(
-                'assets/icons/heart.svg',
+                'assets/icons/movie.svg',
+                width: 24,
                 color: theme.colorScheme.tertiary,
               ),
               label: app?.seriesMovie,
               activeIcon: SvgPicture.asset(
-                'assets/icons/heart.svg',
+                'assets/icons/movie.svg',
+                width: 24,
                 color: theme.colorScheme.onPrimary,
               ),
             ),
@@ -114,12 +116,14 @@ class _MyHomeAppState extends State<MyHomeApp> {
             ),
             BottomNavigationBarItem(
               icon: SvgPicture.asset(
-                'assets/icons/heart.svg',
+                'assets/icons/bear.svg',
+                width: 24,
                 color: theme.colorScheme.tertiary,
               ),
               label: app?.cartoon,
               activeIcon: SvgPicture.asset(
-                'assets/icons/heart.svg',
+                'assets/icons/bear.svg',
+                width: 24,
                 color: theme.colorScheme.onPrimary,
               ),
             ),

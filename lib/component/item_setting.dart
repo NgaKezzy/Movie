@@ -25,7 +25,7 @@ class ItemSetting extends StatelessWidget {
           child: Row(
             children: [
               SvgPicture.asset(path,
-                  color: Theme.of(context).colorScheme.onPrimary),
+                  width: 24, color: Theme.of(context).colorScheme.onPrimary),
               const SizedBox(
                 width: AppSize.size10,
               ),

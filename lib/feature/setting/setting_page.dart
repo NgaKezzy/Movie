@@ -128,8 +128,8 @@ class SettingsPage extends StatelessWidget {
                   height: 20,
                 ),
                 ElevatedButton(
-                    onPressed: () => authCubit.logout(context),
-                    child: Text('Đăng xuất'))
+                    onPressed: () => authCubit.logout(context, app.error),
+                    child: Text(app.logout))
               ],
             );
           },

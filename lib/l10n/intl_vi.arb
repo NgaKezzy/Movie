@@ -63,6 +63,12 @@
     "exclusiveContent":"Nội dung độc quyền chỉ có ở Premium",
     "premiumPackageExpirationDate": "Hạn sử dụng gói premium:",
     "notRegistered": "Chưa đăng ký",
-    "logout":"Đăng xuất"
+    "logout":"Đăng xuất",
+    "welcomeToTheApp":"Chào mừng bạn đến với ứng dụng",
+    "loginToExperienceAllFeatures":"Đăng nhập để trải nghiệm tất cả tính năng",
+    "loginWithGoogle":"Đăng nhập với Google",
+    "CancelLogin":"Hủy đăng nhập",
+    "LoginSuccessfully":"Đăng nhập thành công",
+    "Error":"Lỗi"
 
 }

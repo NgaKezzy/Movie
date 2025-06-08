@@ -30,7 +30,7 @@ class AuthCubit extends HydratedCubit<AuthState> {
     return _db!;
   }
 
-  Future<void> login(BuildContext context) async {
+  Future<void> login(BuildContext context, String titleSuccess, String titleCancel,) async {
     final GoogleSignIn googleSignIn = GoogleSignIn();
     try {
       final user = await googleSignIn.signIn();
@@ -41,7 +41,7 @@ class AuthCubit extends HydratedCubit<AuthState> {
           photoUrl: user.photoUrl.toString(),
           id: user.id.toString(),
           isPremium: false,
-          diamond: 1000,
+          diamond: 100,
         );
 
         // Không cần gọi initializeDb nữa
@@ -52,12 +52,12 @@ class AuthCubit extends HydratedCubit<AuthState> {
 
         // Thành công
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Đăng nhập thành công: ${user.displayName}')),
+          SnackBar(content: Text('${titleSuccess}: ${user.displayName}')),
         );
       } else {
         // Hủy đăng nhập
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Hủy đăng nhập')),
+          SnackBar(content: Text(titleCancel)),
         );
       }
     } catch (error) {
@@ -65,7 +65,7 @@ class AuthCubit extends HydratedCubit<AuthState> {
     }
   }
 
-  Future<void> logout(BuildContext context) async {
+  Future<void> logout(BuildContext context, String titleError) async {
     final GoogleSignIn googleSignIn = GoogleSignIn();
     try {
       await googleSignIn.signOut();
@@ -73,7 +73,7 @@ class AuthCubit extends HydratedCubit<AuthState> {
       context.go(AppRouteConstant.login);
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Lỗi đăng xuất: $error')),
+        SnackBar(content: Text('${titleError}: $error')),
       );
     }
   }

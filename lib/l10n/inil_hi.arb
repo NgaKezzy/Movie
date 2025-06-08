@@ -63,5 +63,11 @@
     "exclusiveContent": "केवल प्रीमियम के लिए विशेष सामग्री",
     "premiumPackageExpirationDate": "प्रीमियम पैकेज की समाप्ति तिथि:",
     "notRegistered": "पंजीकृत नहीं है",
-    "logout": "लॉग आउट करें"
+    "logout": "लॉग आउट करें",
+    "welcomeToTheApp": "ऐप में आपका स्वागत है!",
+    "loginToExperienceAllFeatures": "सभी सुविधाओं का अनुभव करने के लिए लॉगिन करें",
+    "loginWithGoogle": "गूगल के साथ लॉगिन करें",
+    "cancelLogin": "लॉगिन रद्द करें",
+    "loginSuccessfully": "सफलतापूर्वक लॉगिन किया गया",
+    "error": "त्रुटि"
 }

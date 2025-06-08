@@ -8,6 +8,9 @@
   ],
 
   "vi": [
-    "month"
+    "month",
+    "cancelLogin",
+    "loginSuccessfully",
+    "error"
   ]
 }

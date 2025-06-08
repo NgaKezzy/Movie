@@ -39,7 +39,6 @@
     "viewHistoryIsEmpty":"View history is empty !",
     "clearCache":"Clear cache",
     "areYouSureYouWantToClearTheCache":"Are you sure you want to clear the cache?",
-
     "registerPremium":"Register premium",
     "premiumMember":"Premium member",
     "benefits":"Benefits",
@@ -54,8 +53,6 @@
     "month":"month",
     "price":"Price",
     "duration":"Duration",    
-
-
     "currentlyAvailable":"Currently available",
     "unlockExclusiveBenefits":"Unlock exclusive benefits for premium members:",
     "watchHighQualityMovies":"Watch high-quality movies (Full HD / 4K)",
@@ -66,21 +63,13 @@
     "exclusiveContent":"Exclusive content available only on Premium",
      "premiumPackageExpirationDate":"Premium package expiration date:",
     "notRegistered":"Not registered",
-    "logout":"Logout"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    "logout":"Logout",
+    "welcomeToTheApp":"Welcome to the app",
+    "loginToExperienceAllFeatures":"Login to experience all features",
+    "loginWithGoogle":"Login with Google",
+    "cancelLogin":"Cancel login",
+    "loginSuccessfully":"Login successfully",
+    "error":"Error"
 
 
 }

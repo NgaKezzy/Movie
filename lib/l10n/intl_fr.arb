@@ -63,5 +63,11 @@
     "exclusiveContent": "Contenu exclusif disponible uniquement pour les membres Premium",
     "premiumPackageExpirationDate": "Date d'expiration du forfait premium:",
     "notRegistered": "Non enregistré",
-    "logout": "Se déconnecter"
+    "logout": "Se déconnecter",
+    "welcomeToTheApp": "Bienvenue dans l'application",
+    "loginToExperienceAllFeatures": "Connectez-vous pour profiter de toutes les fonctionnalités",
+    "loginWithGoogle": "Se connecter avec Google",
+    "cancelLogin": "Annuler la connexion",
+    "loginSuccessfully": "Connexion réussie",
+    "error": "Erreur"
 }

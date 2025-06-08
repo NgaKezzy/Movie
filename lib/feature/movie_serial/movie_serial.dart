@@ -2,6 +2,7 @@ import 'package:app/config/di.dart';
 import 'package:app/feature/home/cubit/movie_cubit.dart';
 import 'package:app/feature/home/cubit/movie_state.dart';
 import 'package:app/feature/home/widgets/item_grid_and_title.dart';
+import 'package:app/l10n/cubit/locale_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -15,13 +16,15 @@ class MovieSerial extends StatefulWidget {
 
 class _MovieSerialState extends State<MovieSerial> {
   final MovieCubit movieCubit = di.get();
+  late LocaleCubit localeCubit;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-if(movieCubit.state.seriesMovies.isEmpty){
-  movieCubit.getTheListOfMoviesAndSeries();
-}
+    localeCubit = context.read<LocaleCubit>();
+    if (movieCubit.state.seriesMovies.isEmpty) {
+      movieCubit.getTheListOfMoviesAndSeries(localeCubit.state.languageCode);
+    }
   }
 
   @override

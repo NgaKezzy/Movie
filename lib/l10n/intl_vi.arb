@@ -38,22 +38,31 @@
     "selectLanguage":"Chọn ngôn ngữ",
     "viewHistoryIsEmpty":"Lịch sử xem trống !",
     "clearCache":"Xóa bộ nhớ đệm",
-    "areYouSureYouWantToClearTheCache":"Bạn có chắc muốn xóa bộ nhớ đệm ?"
+    "areYouSureYouWantToClearTheCache":"Bạn có chắc muốn xóa bộ nhớ đệm ?",
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    "registerPremium":"Đăng ký premium",
+    "premiumMember":"Thành viên premium",
+    "benefits":"Quyền lợi",
+    "premiumPackages":"Gói premium:",
+    "selectPackage":"Chọn gói",
+    "youHave":"Bạn có",
+    "diamond":"Kim cương",
+    "notEnoughDiamond":"Không đủ kim cương",
+    "youHaveSuccessfullyRegistered":"Bạn đã đăng ký thành công",
+    "premiumPackage":"Gói premium",
+    "days":"ngày",
+    "price":"Giá",
+    "duration":"Thời gian",
+    "currentlyAvailable":"Hiện có",
+    "unlockExclusiveBenefits":"Mở khóa những quyền lợi đặc biệt chỉ dành cho thành viên Premium:",
+    "watchHighQualityMovies":"Xem phim chất lượng cao (Full HD / 4K)",
+    "noAds":"Không quảng cáo – Không bị gián đoạn khi xem",
+    "watchNewMovies":"Xem trước các phim mới – Truy cập sớm nội dung hot",
+    "downloadMovies":"Tải phim về xem offline",
+    "watchOnMultipleDevices":"Xem cùng lúc trên nhiều thiết bị",
+    "exclusiveContent":"Nội dung độc quyền chỉ có ở Premium",
+    "premiumPackageExpirationDate": "Hạn sử dụng gói premium:",
+    "notRegistered": "Chưa đăng ký",
+    "logout":"Đăng xuất"
 
 }

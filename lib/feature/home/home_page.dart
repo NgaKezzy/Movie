@@ -7,6 +7,7 @@ import 'package:app/feature/home/cubit/movie_state.dart';
 import 'package:app/feature/home/widgets/item_film_horizontally.dart';
 import 'package:app/feature/home/widgets/item_grid_and_title.dart';
 import 'package:app/feature/home/widgets/item_slider_image.dart';
+import 'package:app/l10n/cubit/locale_cubit.dart';
 import 'package:app/routers/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,6 +29,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late MovieCubit movieCubit;
   late HomePageCubit homePageCubit;
+  late LocaleCubit localeCubit;
 
   Future<void> permissionHandle() async {
     if (await Permission.notification.request().isDenied) {
@@ -97,6 +99,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     movieCubit = context.read<MovieCubit>();
     homePageCubit = context.read<HomePageCubit>();
+    localeCubit = context.read<LocaleCubit>();
     homePageCubit.state.isNotification ? {} : permissionHandle();
     checkStatusNetwork();
     _pageController = PageController(
@@ -106,8 +109,8 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> initialization() async {
     if (movieCubit.state.movies.isEmpty) {
-      movieCubit.getMovie();
-      movieCubit.getAListOfIndividualMovies();
+      movieCubit.getMovie(localeCubit.state.languageCode);
+      movieCubit.getAListOfIndividualMovies(localeCubit.state.languageCode);
     }
   }
 

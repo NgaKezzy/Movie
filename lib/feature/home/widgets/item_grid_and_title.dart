@@ -166,8 +166,8 @@ class _ItemGridAndTitleState extends State<ItemGridAndTitle> {
                         height: 40,
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Text(
-                          context.watch<LocaleCubit>().state.languageCode ==
-                                  'en'
+                          context.watch<LocaleCubit>().state.languageCode !=
+                                  'vi'
                               ? widget.itemFilms[index].origin_name
                               : widget.itemFilms[index].name,
                           textAlign: TextAlign.center,

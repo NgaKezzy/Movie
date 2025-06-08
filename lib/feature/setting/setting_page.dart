@@ -62,7 +62,7 @@ class SettingsPage extends StatelessWidget {
                 ),
                 ItemSetting(
                   path: 'assets/icons/global.svg',
-                  text: 'Premium Member',
+                  text: app.premiumMember,
                   onTap: () {
                     context.push(AppRouteConstant.premium);
                   },

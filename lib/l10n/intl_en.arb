@@ -38,7 +38,36 @@
     "selectLanguage":"Select language",
     "viewHistoryIsEmpty":"View history is empty !",
     "clearCache":"Clear cache",
-    "areYouSureYouWantToClearTheCache":"Are you sure you want to clear the cache?"
+    "areYouSureYouWantToClearTheCache":"Are you sure you want to clear the cache?",
+
+    "registerPremium":"Register premium",
+    "premiumMember":"Premium member",
+    "benefits":"Benefits",
+    "premiumPackages":"Premium packages",
+    "selectPackage":"Select package",
+    "youHave":"You have",
+    "diamond":"diamond",
+    "notEnoughDiamond":"Not enough diamond",
+    "youHaveSuccessfullyRegistered":"You have successfully registered",
+    "premiumPackage":"Premium package",
+    "days":"days",
+    "month":"month",
+    "price":"Price",
+    "duration":"Duration",    
+
+
+    "currentlyAvailable":"Currently available",
+    "unlockExclusiveBenefits":"Unlock exclusive benefits for premium members:",
+    "watchHighQualityMovies":"Watch high-quality movies (Full HD / 4K)",
+    "noAds":"No ads - No interruptions while watching",
+    "watchNewMovies":"Watch new movies early - Access hot content sooner",
+    "downloadMovies":"Download movies to watch offline",
+    "watchOnMultipleDevices":"Watch on multiple devices simultaneously",
+    "exclusiveContent":"Exclusive content available only on Premium",
+     "premiumPackageExpirationDate":"Premium package expiration date:",
+    "notRegistered":"Not registered",
+    "logout":"Logout"
+
 
 
 

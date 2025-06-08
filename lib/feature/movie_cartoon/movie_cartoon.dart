@@ -1,4 +1,5 @@
 import 'package:app/config/di.dart';
+import 'package:app/l10n/cubit/locale_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:app/feature/home/cubit/movie_cubit.dart';
 import 'package:app/feature/home/cubit/movie_state.dart';
@@ -15,10 +16,13 @@ class MovieCartoon extends StatefulWidget {
 
 class _MovieCartoonState extends State<MovieCartoon> {
   final MovieCubit movieCubit = di.get();
+  late LocaleCubit localeCubit;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    localeCubit = context.read<LocaleCubit>();
     if (movieCubit.state.cartoon.isEmpty) {
       movieCubit.getTheListOfCartoons();
     }

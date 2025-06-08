@@ -5,12 +5,14 @@ part 'locale_state.g.dart';
 
 enum LocaleStatus { init, start, loading, success, error }
 
-List<String> newCountryNames = [
-  'English',
-  'Vietnamese',
+List<String> newCountryNames = ['English', 'Vietnamese', 'French', 'Hindi'];
+List<String> codes = ['en', 'vi', 'fr', 'hi'];
+List<String> newPathCountryFlag = [
+  'england_flag.png',
+  'vietnam_flag.png',
+  'france_flag.png',
+  'india_flag.png'
 ];
-List<String> codes = ['en', 'vi'];
-List<String> newPathCountryFlag = ['england_flag.png', 'vietnam_flag.png'];
 
 @CopyWith()
 class LocaleState extends Equatable {

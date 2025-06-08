@@ -6,8 +6,11 @@ import 'package:app/feature/home/models/data_film.dart';
 import 'package:app/feature/home/models/movie_details.dart';
 import 'package:app/feature/home/models/movie_information.dart';
 import 'package:app/feature/home/network/fetch_api_movie.dart';
+import 'package:app/l10n/cubit/locale_cubit.dart';
 // ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:translator/translator.dart';
 import 'dart:math';
@@ -19,8 +22,25 @@ class MovieCubit extends Cubit<MovieState> {
   }
 
   final translator = GoogleTranslator();
+  Future<String> translate(String content, String languageCode) async {
+    // hàm để dịch sang tiếng anh
+    if (content.isEmpty) return '';
 
-  Future<void> getMovie() async {
+    try {
+      final translation = await translator.translate(
+        content,
+        to: languageCode,
+        // Thêm timeout để tránh chờ quá lâu
+      );
+      return translation.text;
+    } catch (e) {
+      printRed("Translation error: $e");
+      // Trả về nội dung gốc nếu có lỗi
+      return content;
+    }
+  }
+
+  Future<void> getMovie(String languageCode) async {
     // hàm này để lấy thông tin các bộ phim mới nhất
     emit(state.copyWith(status: MovieStatus.loading));
     List<MovieInformation> newMovies = [];
@@ -31,7 +51,8 @@ class MovieCubit extends Cubit<MovieState> {
 
     List items = data['items'];
     for (var i = 0; i < items.length; i++) {
-      final MovieInformation item;
+      MovieInformation item;
+
       item = MovieInformation.fromJson(items[i]);
 
       // Random isPremium với tỷ lệ 20%
@@ -54,7 +75,10 @@ class MovieCubit extends Cubit<MovieState> {
     ));
   }
 
-  Future<void> getMovieDetails(String slug, String languageCode) async {
+  Future<void> getMovieDetails(
+    String slug,
+    String languageCode,
+  ) async {
     // lấy thông tin chi tiết của 1 bộ phim
     DataFilm? newDataFilm;
     Box<MovieDetails> favoriteMovieBox = Hive.box(KeyApp.FAVORITE_MOVIE_BOX);
@@ -68,21 +92,22 @@ class MovieCubit extends Cubit<MovieState> {
       }
 
       newDataFilm = DataFilm.fromJson(data);
-      if (languageCode == 'en') {
+      if (languageCode != 'vi') {
         // nếu là tiếng anh thì dịch nội dung phim
-        newDataFilm.movie.content = await translate(newDataFilm.movie.content);
+        newDataFilm.movie.content =
+            await translate(newDataFilm.movie.content, languageCode);
 
         for (var i = 0; i < newDataFilm.movie.actor.length; i++) {
           newDataFilm.movie.actor[i] =
-              await translate(newDataFilm.movie.actor[i]);
+              await translate(newDataFilm.movie.actor[i], languageCode);
         }
 
         for (var i = 0; i < newDataFilm.movie.category.length; i++) {
           newDataFilm.movie.category[i].name =
-              await translate(newDataFilm.movie.category[i].name);
+              await translate(newDataFilm.movie.category[i].name, languageCode);
         }
       }
-      
+
       // Kiểm tra xem phim có trong danh sách yêu thích không
       newDataFilm.movie.isFavorite = false; // Mặc định là false
       for (var movieDetails in favoriteMovieBox.values) {
@@ -97,20 +122,11 @@ class MovieCubit extends Cubit<MovieState> {
       emit(state.copyWith(status: MovieStatus.error, dataFilm: null));
       return;
     }
-    
+
     emit(state.copyWith(dataFilm: newDataFilm, status: MovieStatus.success));
   }
 
-  Future<String> translate(String content) async {
-    // hàm để dịch sang tiếng anh
-    String newContent = '';
-    await translator.translate(content, to: 'en').then((value) => {
-          newContent = value.toString(),
-        });
-    return newContent;
-  }
-
-  Future<void> getAListOfIndividualMovies() async {
+  Future<void> getAListOfIndividualMovies(String languageCode) async {
     // lấy danh sách các bộ phim 1 tập
     emit(state.copyWith(status: MovieStatus.loading));
     List<MovieInformation> newSingleMovie = [];
@@ -144,7 +160,7 @@ class MovieCubit extends Cubit<MovieState> {
     ));
   }
 
-  Future<void> getTheListOfMoviesAndSeries() async {
+  Future<void> getTheListOfMoviesAndSeries(String languageCode) async {
     // lấy danh sách phim nhiều tập
     emit(state.copyWith(status: MovieStatus.loading));
     List<MovieInformation> newSeriesMovies = [];
@@ -160,6 +176,7 @@ class MovieCubit extends Cubit<MovieState> {
       item.thumb_url = 'https://img.phimapi.com/${item.thumb_url}';
       // Random isPremium với tỷ lệ 20%
       item.isPremium = random.nextDouble() < 0.2;
+
       newSeriesMovies.add(item);
     }
     if (state.favoriteMovies.isNotEmpty && newSeriesMovies.isNotEmpty) {
@@ -177,7 +194,7 @@ class MovieCubit extends Cubit<MovieState> {
     ));
   }
 
-  Future<void> getTheListOfCartoons() async {
+   Future<void> getTheListOfCartoons() async {
     // lấy danh sách phim hoạt hình
     emit(state.copyWith(status: MovieStatus.loading));
     List<MovieInformation> newCartoons = [];
@@ -239,7 +256,8 @@ class MovieCubit extends Cubit<MovieState> {
     List<MovieDetails?> itemFilms = [];
 
     Box<MovieDetails> favoriteMovieBox = Hive.box(KeyApp.FAVORITE_MOVIE_BOX);
-    printGreen("Loading favorites from storage. Total: ${favoriteMovieBox.length}");
+    printGreen(
+        "Loading favorites from storage. Total: ${favoriteMovieBox.length}");
 
     if (favoriteMovieBox.isEmpty) {
       emit(state.copyWith(favoriteMovies: []));
@@ -259,32 +277,30 @@ class MovieCubit extends Cubit<MovieState> {
     required MovieDetails? itemFilm,
   }) async {
     emit(state.copyWith(status: MovieStatus.loading));
-    
+
     // Kiểm tra xem itemFilm có null không
     if (itemFilm == null) {
       printRed("Error: Trying to add null movie to favorites");
       emit(state.copyWith(status: MovieStatus.error));
       return;
     }
-    
+
     Box<MovieDetails> favoriteMovieBox = Hive.box(KeyApp.FAVORITE_MOVIE_BOX);
-    
+
     // Không xóa toàn bộ box, chỉ thêm phim mới vào
     // favoriteMovieBox.clear(); - Dòng này gây ra vấn đề
-    
+
     List<MovieDetails?> newFavoriteMovies = [itemFilm, ...state.favoriteMovies];
-    
+
     // Thêm phim mới vào box
     await favoriteMovieBox.add(itemFilm);
-    
+
     // In ra thông tin để debug
     printGreen("Added movie to favorites: ${itemFilm.name}");
     printGreen("Total favorites: ${favoriteMovieBox.length}");
-    
+
     emit(state.copyWith(
-      favoriteMovies: newFavoriteMovies, 
-      status: MovieStatus.success
-    ));
+        favoriteMovies: newFavoriteMovies, status: MovieStatus.success));
   }
 
   Future<void> removeMoviesToFavoritesList({
@@ -294,9 +310,9 @@ class MovieCubit extends Cubit<MovieState> {
       printRed("Error: Trying to remove null movie from favorites");
       return;
     }
-    
+
     emit(state.copyWith(status: MovieStatus.loading));
-    
+
     // Tạo danh sách mới không bao gồm phim cần xóa
     List<MovieDetails?> updatedFavorites = [];
     for (var movie in state.favoriteMovies) {
@@ -304,23 +320,23 @@ class MovieCubit extends Cubit<MovieState> {
         updatedFavorites.add(movie);
       }
     }
-    
+
     // Cập nhật state
     emit(state.copyWith(favoriteMovies: updatedFavorites));
-    
+
     // Cập nhật Hive box
     Box<MovieDetails> favoriteMovieBox = Hive.box(KeyApp.FAVORITE_MOVIE_BOX);
     favoriteMovieBox.clear();
-    
+
     for (var movie in updatedFavorites) {
       if (movie != null) {
         await favoriteMovieBox.add(movie);
       }
     }
-    
+
     printGreen("Removed movie from favorites: ${itemFilm.name}");
     printGreen("Total favorites after removal: ${favoriteMovieBox.length}");
-    
+
     emit(state.copyWith(status: MovieStatus.success));
   }
 
@@ -328,19 +344,19 @@ class MovieCubit extends Cubit<MovieState> {
     emit(state.copyWith(status: MovieStatus.star));
 
     DataFilm? newDataFilm = state.dataFilm;
-    if (newDataFilm == null || newDataFilm.movie == null) {
+    if (newDataFilm == null) {
       printRed("Error: DataFilm or movie is null in setHeart");
       emit(state.copyWith(status: MovieStatus.error));
       return;
     }
-    
+
     // Đảo ngược trạng thái yêu thích
     bool newFavoriteState = !newDataFilm.movie.isFavorite;
     newDataFilm.movie.isFavorite = newFavoriteState;
-    
+
     // Cập nhật trong state
     emit(state.copyWith(dataFilm: newDataFilm, status: MovieStatus.success));
-    
+
     // Lưu thay đổi vào Hive
     if (newFavoriteState) {
       // Nếu yêu thích, thêm vào danh sách
@@ -349,8 +365,9 @@ class MovieCubit extends Cubit<MovieState> {
       // Nếu bỏ yêu thích, xóa khỏi danh sách
       await removeMoviesToFavoritesList(itemFilm: newDataFilm.movie);
     }
-    
-    printGreen("Heart set to: $newFavoriteState for movie: ${newDataFilm.movie.name}");
+
+    printGreen(
+        "Heart set to: $newFavoriteState for movie: ${newDataFilm.movie.name}");
   }
 
   Future<void> addToWatchHistory({required String slug}) async {

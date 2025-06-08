@@ -9,7 +9,7 @@ class MovieInformation {
 
   final String slug;
 
-  final String origin_name;
+   String origin_name;
 
   String poster_url;
 

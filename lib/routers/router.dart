@@ -19,10 +19,8 @@ class AppRouteConstant {
   // cấp 1 của myHomeApp
   static const String watchAVideo = '/watch-a-video';
   static const String searchMovie = '/search-movie';
-
   // settings
   static const String viewHistory = '/viewHistory';
-
   // Nested Key
   static final navigatorKeyMeansure = GlobalKey<NavigatorState>();
 }

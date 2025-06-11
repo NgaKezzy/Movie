@@ -41,7 +41,7 @@ class HomePageCubit extends Cubit<HomePageState> {
   Future<void> checkNetwork() async {
     emit(state.copyWith(status: HomePageStatus.init));
     final connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.none) {
+    if (connectivityResult.first == ConnectivityResult.none) {
       printRed('No connect network');
       emit(state.copyWith(
           isConnectNetwork: false, status: HomePageStatus.success));

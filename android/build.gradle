@@ -17,6 +17,16 @@ allprojects {
         google()
         mavenCentral()
     }
+
+    // 👇 Force dùng bcprov-jdk18on version thấp hơn, tương thích Java 17
+    configurations.all {
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            if (details.requested.group == 'org.bouncycastle' &&
+                details.requested.name == 'bcprov-jdk18on') {
+                details.useVersion '1.76' // hoặc '1.70' nếu bạn muốn an toàn hơn
+            }
+        }
+    }
 }
 
 rootProject.buildDir = '../build'

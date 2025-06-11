@@ -121,21 +121,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                     ),
                     GestureDetector(
                       onTap: () async {
-                        if (context
-                                .read<MovieCubit>()
-                                .state
-                                .dataFilm
-                                ?.movie
-                                .isFavorite ==
-                            false) {
-                          // Thêm vào yêu thích
-                          await movieCubit.addMoviesToFavoritesList(
-                              itemFilm: movieCubit.state.dataFilm?.movie);
-                        } else {
-                          // Xóa khỏi yêu thích
-                          await movieCubit.removeMoviesToFavoritesList(
-                              itemFilm: movieCubit.state.dataFilm?.movie);
-                        }
+                        // Chỉ cần gọi setHeart(), không cần gọi thêm các hàm khác
                         await movieCubit.setHeart();
                       },
                       child: Icon(

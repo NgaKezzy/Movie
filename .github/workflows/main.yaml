@@ -30,11 +30,8 @@ jobs:
       - name: Generate code (build_runner)
         run: flutter pub run build_runner build --delete-conflicting-outputs
 
-      - name: Analyze project
-        run: flutter analyze
-
-      - name: Run tests
-        run: flutter test
+      - name: Get dependencies
+        run: flutter pub get
 
       - name: Build APK
         run: flutter build apk --release

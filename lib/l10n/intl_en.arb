@@ -69,7 +69,9 @@
     "loginWithGoogle":"Login with Google",
     "cancelLogin":"Cancel login",
     "loginSuccessfully":"Login successfully",
-    "error":"Error"
+    "error":"Error",
+    "register":"Register",
+    "youNeedToRegister":"You need to register for the Premium package to view this content"
 
 
 }

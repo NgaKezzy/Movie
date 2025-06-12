@@ -69,5 +69,7 @@
     "loginWithGoogle": "Se connecter avec Google",
     "cancelLogin": "Annuler la connexion",
     "loginSuccessfully": "Connexion réussie",
-    "error": "Erreur"
+    "error": "Erreur",
+    "register": "S'inscrire",
+    "youNeedToRegister": "Vous devez vous inscrire au forfait Premium pour voir ce contenu"
 }

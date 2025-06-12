@@ -71,18 +71,25 @@ class _ItemGridAndTitleState extends State<ItemGridAndTitle> {
                             return AlertDialog(
                               title: Text(
                                   AppLocalizations.of(context)!.notification),
-                              content: Text(
-                                  'Bạn cần đăng ký gói Premium để xem nội dung này'),
+                              content: Text(AppLocalizations.of(context)!
+                                  .youNeedToRegister),
                               actions: <Widget>[
                                 TextButton(
                                   child: Text(
-                                      AppLocalizations.of(context)!.cancel),
+                                    AppLocalizations.of(context)!.cancel,
+                                    style: TextStyle(
+                                        color: theme.colorScheme.tertiary),
+                                  ),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
                                 ),
                                 TextButton(
-                                  child: Text('Đăng ký'),
+                                  child: Text(
+                                    AppLocalizations.of(context)!.register,
+                                    style: TextStyle(
+                                        color: theme.colorScheme.tertiary),
+                                  ),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                     // Chuyển đến trang đăng ký Premium

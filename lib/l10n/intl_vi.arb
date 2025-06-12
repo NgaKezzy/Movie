@@ -69,6 +69,7 @@
     "loginWithGoogle":"Đăng nhập với Google",
     "CancelLogin":"Hủy đăng nhập",
     "LoginSuccessfully":"Đăng nhập thành công",
-    "Error":"Lỗi"
-
+    "Error":"Lỗi",
+    "register":"Đăng ký",
+    "youNeedToRegister":"Bạn cần đăng ký gói Premium để xem nội dung này"
 }

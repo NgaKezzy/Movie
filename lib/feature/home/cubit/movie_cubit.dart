@@ -110,12 +110,10 @@ class MovieCubit extends Cubit<MovieState> {
       for (var movieDetails in favoriteMovieBox.values) {
         if (movieDetails.slug == newDataFilm.movie.slug) {
           newDataFilm.movie.isFavorite = true;
-          printGreen("Movie ${newDataFilm.movie.name} is in favorites");
           break;
         }
       }
     } catch (e) {
-      printRed("Error in getMovieDetails: $e");
       emit(state.copyWith(status: MovieStatus.error, dataFilm: null));
       return;
     }
@@ -253,8 +251,7 @@ class MovieCubit extends Cubit<MovieState> {
     List<MovieDetails?> itemFilms = [];
 
     Box<MovieDetails> favoriteMovieBox = Hive.box(KeyApp.FAVORITE_MOVIE_BOX);
-    printGreen(
-        "Loading favorites from storage. Total: ${favoriteMovieBox.length}");
+ 
 
     if (favoriteMovieBox.isEmpty) {
       emit(state.copyWith(favoriteMovies: []));
@@ -263,7 +260,6 @@ class MovieCubit extends Cubit<MovieState> {
         MovieDetails? movie = favoriteMovieBox.getAt(i);
         if (movie != null) {
           itemFilms.add(movie);
-          printGreen("Loaded favorite: ${movie.name}");
         }
       }
       emit(state.copyWith(favoriteMovies: itemFilms));
@@ -292,9 +288,7 @@ class MovieCubit extends Cubit<MovieState> {
     // Thêm phim mới vào box
     await favoriteMovieBox.add(itemFilm);
 
-    // In ra thông tin để debug
-    printGreen("Added movie to favorites: ${itemFilm.name}");
-    printGreen("Total favorites: ${favoriteMovieBox.length}");
+  
 
     emit(state.copyWith(
         favoriteMovies: newFavoriteMovies, status: MovieStatus.success));
@@ -331,9 +325,6 @@ class MovieCubit extends Cubit<MovieState> {
       }
     }
 
-    printGreen("Removed movie from favorites: ${itemFilm.name}");
-    printGreen("Total favorites after removal: ${favoriteMovieBox.length}");
-
     emit(state.copyWith(status: MovieStatus.success));
   }
 
@@ -363,8 +354,7 @@ class MovieCubit extends Cubit<MovieState> {
       await removeMoviesToFavoritesList(itemFilm: newDataFilm.movie);
     }
 
-    printGreen(
-        "Heart set to: $newFavoriteState for movie: ${newDataFilm.movie.name}");
+
   }
 
   Future<void> addToWatchHistory({required String slug}) async {

@@ -1,6 +1,7 @@
 import 'package:app/config/di.dart';
 import 'package:app/feature/home/cubit/home_page_cubit.dart';
 import 'package:app/firebase/firebase_api.dart';
+import 'package:app/firebase_options.dart';
 import 'package:app/l10n/cubit/locale_cubit.dart';
 import 'package:app/local_storage/local_storage.dart';
 import 'package:app/routers/router.dart';
@@ -35,7 +36,9 @@ void main() async {
   await LocalStorage.hiveRegisterAdapter();
   await LocalStorage.hiveOpenBox();
   await setup();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await FirebaseApi().initNotifications();
 
   runApp(

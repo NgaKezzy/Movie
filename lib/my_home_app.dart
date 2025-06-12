@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app/config/print_color.dart';
 import 'package:app/feature/favorite/favorite_movie_page.dart';
 import 'package:app/feature/home/home_page_provider.dart';
@@ -33,26 +35,28 @@ class _MyHomeAppState extends State<MyHomeApp> {
     // TODO: implement initState
     super.initState();
     // Lắng nghe thông báo khi app đang mở
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print("Foreground Notification: ${message.notification?.title}");
-    });
+ 
+      FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+        print("Foreground Notification: ${message.notification?.title}");
+      });
 
-    // Lắng nghe sự kiện nhấn vào thông báo
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print("Foreground Notification: ${message.notification?.title}");
-    });
+      // Lắng nghe sự kiện nhấn vào thông báo
+      FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+        print("Foreground Notification: ${message.notification?.title}");
+      });
 
-    // Kiểm tra nếu app được mở từ thông báo
-    FirebaseMessaging.instance.getInitialMessage().then((message) {
-      if (message?.data['route'] != null && message?.data['slug'] != null) {
-        final String slug = message?.data['slug'];
-        final String route = message?.data['route'];
-        context.pushReplacement(route, extra: slug);
-        printRed(route);
-        printRed(slug);
-      }
-      print("Foreground Notification: ${message?.notification?.title}");
-    });
+      // Kiểm tra nếu app được mở từ thông báo
+      FirebaseMessaging.instance.getInitialMessage().then((message) {
+        if (message?.data['route'] != null && message?.data['slug'] != null) {
+          final String slug = message?.data['slug'];
+          final String route = message?.data['route'];
+          context.pushReplacement(route, extra: slug);
+          printRed(route);
+          printRed(slug);
+        }
+        print("Foreground Notification: ${message?.notification?.title}");
+      });
+    
   }
 
   @override

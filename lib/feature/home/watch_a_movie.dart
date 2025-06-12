@@ -61,32 +61,29 @@ class _WatchAMovieState extends State<WatchAMovie> {
               return false;
             },
             child: SafeArea(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Stack(
                 children: [
-                  Stack(
-                    children: [
-                      VideoPlayerWidget(
-                          // movieInformation: widget.movieInformation,
-                          url: state.dataFilm?.episodes[0].server_data[0]
-                                  .link_m3u8 ??
-                              '',
-                          dataFilm: state.dataFilm),
-                      Positioned(
-                          left: 20,
-                          top: 20,
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: SvgPicture.asset(
-                              'assets/icons/chevron_down.svg',
-                              color: Colors.red,
-                              width: 30,
-                            ),
-                          ))
-                    ],
+                  Expanded(
+                    child: VideoPlayerWidget(
+                        // movieInformation: widget.movieInformation,
+                        url: state.dataFilm?.episodes[0].server_data[0]
+                                .link_m3u8 ??
+                            '',
+                        dataFilm: state.dataFilm),
                   ),
+                  Positioned(
+                      left: 20,
+                      top: 20,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: SvgPicture.asset(
+                          'assets/icons/chevron_down.svg',
+                          color: Colors.red,
+                          width: 30,
+                        ),
+                      ))
                 ],
               ),
             ),

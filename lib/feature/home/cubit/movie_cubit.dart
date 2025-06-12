@@ -6,10 +6,7 @@ import 'package:app/feature/home/models/data_film.dart';
 import 'package:app/feature/home/models/movie_details.dart';
 import 'package:app/feature/home/models/movie_information.dart';
 import 'package:app/feature/home/network/fetch_api_movie.dart';
-import 'package:app/l10n/cubit/locale_cubit.dart';
-// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:translator/translator.dart';

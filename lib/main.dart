@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app/config/di.dart';
 import 'package:app/feature/home/cubit/home_page_cubit.dart';
 import 'package:app/firebase/firebase_api.dart';
@@ -39,7 +41,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await FirebaseApi().initNotifications();
+
+    await FirebaseApi().initNotifications();
 
   runApp(
     MultiBlocProvider(

@@ -2,19 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-<!-- Quyền gửi thông báo (Firebase Cloud Messaging cần) -->
-<key>UIBackgroundModes</key>
+	<key>CFBundleURLTypes</key>
 <array>
-  <string>fetch</string>
-  <string>remote-notification</string>
+  <dict>
+    <key>CFBundleTypeRole</key>
+    <string>Editor</string>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>com.googleusercontent.apps.856710108082-rqcrsmc8j7hkr2rs2j4u0i56r0t8nljf</string> <!-- dùng đúng REVERSED_CLIENT_ID -->
+    </array>
+  </dict>
 </array>
 
-<key>FirebaseAppDelegateProxyEnabled</key>
-<true/>
-
-<!-- Tuỳ chọn: mô tả quyền gửi thông báo (hiện popup xin phép user) -->
-<key>NSUserNotificationUsageDescription</key>
-<string>Ứng dụng cần quyền gửi thông báo để cập nhật phim mới cho bạn.</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -37,10 +36,21 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>This app uses the local network to connect to development tools.</string>
+	<key>NSUserNotificationUsageDescription</key>
+	<string>Ứng dụng cần quyền gửi thông báo để cập nhật phim mới cho bạn.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

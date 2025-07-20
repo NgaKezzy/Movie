@@ -1,16 +1,14 @@
 import 'package:app/config/di.dart';
 import 'package:app/feature/home/cubit/movie_cubit.dart';
 import 'package:app/feature/home/cubit/movie_state.dart';
+import 'package:app/feature/home/models/movie_information.dart';
 import 'package:app/feature/home/widgets/item_grid_and_title.dart';
 import 'package:app/l10n/cubit/locale_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-enum MovieType {
-  series,
-  cartoon,
-}
+enum MovieType { series, cartoon, single }
 
 class MovieSerial extends StatefulWidget {
   const MovieSerial({super.key});
@@ -30,7 +28,12 @@ class _MovieSerialState extends State<MovieSerial> {
     localeCubit = context.read<LocaleCubit>();
     if (movieCubit.state.seriesMovies.isEmpty) {
       movieCubit.getTheListOfMoviesAndSeries(localeCubit.state.languageCode);
+      movieCubit.getTheListOfCartoons();
     }
+  }
+
+  MovieType getMovieType() {
+    return movieType;
   }
 
   @override
@@ -55,6 +58,10 @@ class _MovieSerialState extends State<MovieSerial> {
                 value: MovieType.cartoon,
                 child: Text(app?.cartoon ?? ''),
               ),
+              DropdownMenuItem(
+                value: MovieType.single,
+                child: Text(app?.singleMovie ?? ''),
+              ),
             ],
             onChanged: (MovieType? newValue) {
               movieType = newValue!;
@@ -70,10 +77,20 @@ class _MovieSerialState extends State<MovieSerial> {
       ),
       body: BlocBuilder<MovieCubit, MovieState>(
         builder: (context, state) {
+          List<MovieInformation> s = [];
+          switch (movieType) {
+            case MovieType.series:
+              s = state.seriesMovies;
+              break;
+            case MovieType.cartoon:
+              s = state.cartoon;
+              break;
+            case MovieType.single:
+              s = state.singleMovies;
+              break;
+          }
           return ItemGridAndTitle(
-            itemFilms: movieType == MovieType.series
-                ? state.seriesMovies
-                : state.cartoon,
+            itemFilms: s,
             title: app?.seriesMovie ?? '',
           );
         },

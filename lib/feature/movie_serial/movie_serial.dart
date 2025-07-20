@@ -7,6 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+enum MovieType {
+  series,
+  cartoon,
+}
+
 class MovieSerial extends StatefulWidget {
   const MovieSerial({super.key});
 
@@ -15,6 +20,7 @@ class MovieSerial extends StatefulWidget {
 }
 
 class _MovieSerialState extends State<MovieSerial> {
+  MovieType movieType = MovieType.series;
   final MovieCubit movieCubit = di.get();
   late LocaleCubit localeCubit;
   @override
@@ -35,11 +41,39 @@ class _MovieSerialState extends State<MovieSerial> {
     return Scaffold(
       appBar: AppBar(
         title: Text(app?.seriesMovie ?? ''),
+        actions: [
+          DropdownButton<MovieType>(
+            value: movieType,
+
+            underline: const SizedBox(), // Ẩn đường gạch chân
+            items: [
+              DropdownMenuItem(
+                value: MovieType.series,
+                child: Text(app?.seriesMovie ?? ''),
+              ),
+              DropdownMenuItem(
+                value: MovieType.cartoon,
+                child: Text(app?.cartoon ?? ''),
+              ),
+            ],
+            onChanged: (MovieType? newValue) {
+              movieType = newValue!;
+              setState(() {
+                movieType = newValue;
+              });
+            },
+          ),
+          SizedBox(
+            width: 16,
+          )
+        ],
       ),
       body: BlocBuilder<MovieCubit, MovieState>(
         builder: (context, state) {
           return ItemGridAndTitle(
-            itemFilms: state.seriesMovies,
+            itemFilms: movieType == MovieType.series
+                ? state.seriesMovies
+                : state.cartoon,
             title: app?.seriesMovie ?? '',
           );
         },

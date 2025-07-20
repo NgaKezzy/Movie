@@ -44,7 +44,6 @@ class FetchApiMovie {
   }
 
   static Future<Map<String, dynamic>> getAListOfIndividualMovies() async {
-    
     var uri = Uri.https(KeyApp.Base_URL, KeyApp.SINGLE_MOVIES, {'limit': '50'});
     Map<String, dynamic> result = {};
     try {

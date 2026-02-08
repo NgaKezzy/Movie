@@ -12,14 +12,14 @@
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
+  /// File path: assets/svg/app_logo.svg
+  String get appLogo => 'assets/svg/app_logo.svg';
+
   /// File path: assets/svg/empty.svg
   String get empty => 'assets/svg/empty.svg';
 
-  /// File path: assets/svg/logo.svg
-  String get logo => 'assets/svg/logo.svg';
-
   /// List of all assets
-  List<String> get values => [empty, logo];
+  List<String> get values => [appLogo, empty];
 }
 
 class Assets {

@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:story/common/domain/entities/response/user_data.dart';
-import 'package:story/common/widgets/text_field/default_textfield.dart';
-import 'package:story/core/colors/app_colors.dart';
-import 'package:story/core/di/di.dart';
-import 'package:story/core/routers/app_router.dart';
-import 'package:story/features/auth/cubit/auth_cubit.dart';
+import 'package:movie/common/domain/entities/response/user_data.dart';
+import 'package:movie/common/widgets/text_field/default_textfield.dart';
+import 'package:movie/core/colors/app_colors.dart';
+import 'package:movie/core/di/di.dart';
+import 'package:movie/core/routers/app_router.dart';
+import 'package:movie/features/auth/cubit/auth_cubit.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -80,7 +80,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               Gap(30.h),
-              DefaultTextfield(
+              AppTextField(
                 controller: _nameController,
                 isError: isErrorName,
                 heightContainer: 56,
@@ -94,7 +94,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 errorText: 'Vui lòng nhập họ và tên',
               ),
               Gap(16.h),
-              DefaultTextfield(
+              AppTextField(
                 controller: _usernameController,
                 isError: isErrorUsername,
                 heightContainer: 56,
@@ -108,7 +108,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 errorText: 'Vui lòng nhập tài khoản',
               ),
               Gap(16.h),
-              DefaultTextfield(
+              AppTextField(
                 controller: _emailController,
                 isError: isErrorEmail,
                 heightContainer: 56,
@@ -122,7 +122,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 errorText: 'Vui lòng nhập email',
               ),
               Gap(16.h),
-              DefaultTextfield(
+              AppTextField(
                 controller: _passwordController,
                 isError: isErrorPass,
                 heightContainer: 56,
@@ -245,18 +245,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
       decoration: InputDecoration(
         hintText: hinText,
         hintStyle: TextStyle(fontSize: 14.sp, letterSpacing: 1),
-        suffixIcon:
-            isPassWord
-                ? IconButton(
-                  onPressed: () {
-                    onTap?.call();
-                  },
-                  icon: Icon(
-                    isShowPass ? Icons.visibility : Icons.visibility_off,
-                    size: 20.w,
-                  ),
-                )
-                : null,
+        suffixIcon: isPassWord
+            ? IconButton(
+                onPressed: () {
+                  onTap?.call();
+                },
+                icon: Icon(
+                  isShowPass ? Icons.visibility : Icons.visibility_off,
+                  size: 20.w,
+                ),
+              )
+            : null,
         fillColor: AppColors.white,
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColors.grey, width: 1.0),

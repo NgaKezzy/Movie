@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:story/common/domain/entities/response/movie_data.dart';
+import 'package:movie/common/domain/entities/response/movie_data.dart';
 part 'movie_info.g.dart';
 
 @JsonSerializable()

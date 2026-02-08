@@ -1,6 +1,6 @@
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:story/common/data/data_source/local/local_storage.dart';
-import 'package:story/core/language/cubit/language_state.dart';
+import 'package:movie/common/data/data_source/local/local_storage.dart';
+import 'package:movie/core/language/cubit/language_state.dart';
 
 
 class LanguageCubit extends HydratedCubit<LanguageState> {

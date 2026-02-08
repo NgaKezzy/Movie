@@ -3,14 +3,13 @@ import 'dart:io';
 import 'package:cupertino_native/components/tab_bar.dart';
 import 'package:cupertino_native/style/sf_symbol.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:story/core/language/l10n/app_localizations.dart';
-import 'package:story/common/widgets/dot_navigation_bar/DotNavigationBarItem.dart';
-import 'package:story/common/widgets/dot_navigation_bar/NavBars.dart';
-import 'package:story/features/home/home_provider/home_provider.dart';
-import 'package:story/features/search/search_provider/search_provider.dart';
-import 'package:story/features/setting/setting_provider/movie_history_provider.dart';
-import 'package:story/features/setting/setting_provider/setting_provider.dart';
+import 'package:movie/core/language/l10n/app_localizations.dart';
+import 'package:movie/common/widgets/dot_navigation_bar/DotNavigationBarItem.dart';
+import 'package:movie/common/widgets/dot_navigation_bar/NavBars.dart';
+import 'package:movie/features/home/home_provider/home_provider.dart';
+import 'package:movie/features/search/search_provider/search_provider.dart';
+import 'package:movie/features/setting/setting_provider/movie_history_provider.dart';
+import 'package:movie/features/setting/setting_provider/setting_provider.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});

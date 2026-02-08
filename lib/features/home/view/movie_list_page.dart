@@ -1,11 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:story/common/widgets/loading/loading_component.dart';
-import 'package:story/core/di/di.dart';
-import 'package:story/features/home/models/param_movie_list_page.dart';
-import 'package:story/features/movie/cubit/movie_cubit.dart';
-import 'package:story/features/movie/cubit/movie_state.dart';
+import 'package:movie/common/widgets/loading/loading_component.dart';
+import 'package:movie/core/di/di.dart';
+import 'package:movie/features/home/models/param_movie_list_page.dart';
+import 'package:movie/features/movie/cubit/movie_cubit.dart';
 
 class MovieListPage extends StatelessWidget {
   MovieListPage({super.key, required this.param});

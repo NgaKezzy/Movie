@@ -1,5 +1,5 @@
-import 'package:story/common/domain/entities/response/user_data.dart';
-import 'package:story/features/auth/cubit/auth_state.dart';
+import 'package:movie/common/domain/entities/response/user_data.dart';
+import 'package:movie/features/auth/cubit/auth_state.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 class AuthCubit extends HydratedCubit<AuthState> {

@@ -1,23 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:story/core/language/l10n/app_localizations.dart';
+import 'package:movie/core/gen/assets.gen.dart';
+import 'package:movie/core/language/l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/web.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-import 'package:story/common/domain/entities/response/movie_data.dart';
-import 'package:story/common/widgets/loading/loading_component.dart';
-import 'package:story/core/colors/app_colors.dart';
-import 'package:story/core/di/di.dart';
-import 'package:story/core/routers/app_router.dart';
-import 'package:story/core/text_style/app_text_style.dart';
-import 'package:story/features/home/models/param_movie_list_page.dart';
-import 'package:story/features/movie/cubit/movie_cubit.dart';
-import 'package:story/features/movie/cubit/movie_state.dart';
+import 'package:movie/common/domain/entities/response/movie_data.dart';
+import 'package:movie/common/widgets/loading/loading_component.dart';
+import 'package:movie/core/colors/app_colors.dart';
+import 'package:movie/core/di/di.dart';
+import 'package:movie/core/routers/app_router.dart';
+import 'package:movie/core/text_style/app_text_style.dart';
+import 'package:movie/features/home/models/param_movie_list_page.dart';
+import 'package:movie/features/movie/cubit/movie_cubit.dart';
+import 'package:movie/features/movie/cubit/movie_state.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -93,26 +93,7 @@ class _HomePageState extends State<HomePage> {
         child: Row(
           children: [
             // Logo SVG hình tròn
-            Container(
-              padding: EdgeInsets.all(6.r),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.red5.withOpacity(0.3),
-                    blurRadius: 10,
-                    spreadRadius: 1,
-                  ),
-                ],
-              ),
-              child: ClipOval(
-                child: SvgPicture.asset(
-                  'assets/svg/logo.svg',
-                  height: 28.h,
-                  width: 28.w,
-                ),
-              ),
-            ),
+            SvgPicture.asset(Assets.svg.appLogo, height: 28.h, width: 28.w),
             Gap(12.w),
             // Tên app với gradient
             ShaderMask(
@@ -121,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                 colors: [AppColors.red1, AppColors.red5],
               ).createShader(bounds),
               child: Text(
-                'Story',
+                'Movie',
                 style: AppTextStyles.textStyleBold20.copyWith(
                   letterSpacing: 1.5,
                   color: Colors.white,
@@ -131,38 +112,6 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      actions: [
-        // Icon movie decorative
-        Container(
-          margin: EdgeInsets.only(right: 16.w),
-          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                AppColors.red5.withOpacity(0.2),
-                AppColors.red3.withOpacity(0.1),
-              ],
-            ),
-            borderRadius: BorderRadius.circular(20.r),
-          ),
-          child: Row(
-            children: [
-              Icon(
-                Icons.movie_filter_rounded,
-                size: 18.sp,
-                color: AppColors.red5,
-              ),
-              Gap(4.w),
-              Text(
-                'Movie',
-                style: AppTextStyles.textStyleBold12.copyWith(
-                  color: AppColors.red5,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:story/common/domain/entities/response/movie_data.dart';
-import 'package:story/core/di/di.dart';
-import 'package:story/features/auth/cubit/auth_cubit.dart';
-import 'package:story/features/auth/login_screen.dart';
-import 'package:story/features/auth/register_screen.dart';
-import 'package:story/features/home/models/param_movie_list_page.dart';
-import 'package:story/features/home/view/movie_list_page.dart';
-import 'package:story/features/home/view/watch_movie_screen.dart';
-import 'package:story/features/movie/cubit/movie_cubit.dart';
-import 'package:story/features/my_home_page.dart';
-import 'package:story/features/setting/movie_history_page.dart';
-import 'package:story/features/splash/splash_page.dart';
+import 'package:movie/common/domain/entities/response/movie_data.dart';
+import 'package:movie/core/di/di.dart';
+import 'package:movie/features/auth/cubit/auth_cubit.dart';
+import 'package:movie/features/auth/login_screen.dart';
+import 'package:movie/features/auth/register_screen.dart';
+import 'package:movie/features/home/models/param_movie_list_page.dart';
+import 'package:movie/features/home/view/movie_list_page.dart';
+import 'package:movie/features/home/view/watch_movie_screen.dart';
+import 'package:movie/features/movie/cubit/movie_cubit.dart';
+import 'package:movie/features/my_home_page.dart';
+import 'package:movie/features/setting/movie_history_page.dart';
+import 'package:movie/features/splash/splash_page.dart';
 
 class AppRouteConstant {
   AppRouteConstant._();

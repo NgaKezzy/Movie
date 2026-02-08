@@ -1,5 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:story/core/constants/constants.dart';
+import 'package:movie/core/constants/constants.dart';
 
 class SharedPrefs {
   static final SharedPrefs _instance = SharedPrefs._internal();

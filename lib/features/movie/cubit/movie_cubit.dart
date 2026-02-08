@@ -1,18 +1,16 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:logger/web.dart';
-import 'package:story/common/data/data_source/repository/movie_repository_iplm.dart';
-import 'package:story/common/domain/entities/request/keyword.dart';
-import 'package:story/common/domain/entities/request/limit_movie.dart';
-import 'package:story/common/domain/entities/request/page.dart';
-import 'package:story/common/domain/entities/response/movie_data.dart';
-import 'package:story/common/widgets/loading/loading.dart';
-import 'package:story/core/di/di.dart';
-import 'package:story/core/routers/app_router.dart';
-import 'package:story/features/movie/cubit/movie_state.dart';
+import 'package:movie/common/data/data_source/repository/movie_repository_iplm.dart';
+import 'package:movie/common/domain/entities/request/keyword.dart';
+import 'package:movie/common/domain/entities/request/limit_movie.dart';
+import 'package:movie/common/domain/entities/request/page.dart';
+import 'package:movie/common/domain/entities/response/movie_data.dart';
+import 'package:movie/core/di/di.dart';
+import 'package:movie/core/routers/app_router.dart';
+import 'package:movie/features/movie/cubit/movie_state.dart';
 
 class MovieCubit extends HydratedCubit<MovieState> {
   final MovieRepositoryImpl movieRepositoryImpl;

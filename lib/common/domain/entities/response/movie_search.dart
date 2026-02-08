@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:story/common/domain/entities/response/movie_data.dart';
+import 'package:movie/common/domain/entities/response/movie_data.dart';
 
 part 'movie_search.g.dart';
 

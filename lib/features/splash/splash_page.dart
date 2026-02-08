@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:story/core/di/di.dart';
-import 'package:story/core/gen/assets.gen.dart';
-import 'package:story/core/routers/app_router.dart';
-import 'package:story/features/movie/cubit/movie_cubit.dart';
+import 'package:movie/core/di/di.dart';
+import 'package:movie/core/gen/assets.gen.dart';
+import 'package:movie/core/routers/app_router.dart';
+import 'package:movie/features/movie/cubit/movie_cubit.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -41,7 +41,7 @@ class _SplashPageState extends State<SplashPage> {
             colors: [Color(0XFF024CAA), Color(0XFF013577), Color(0XFF011E44)],
           ),
         ),
-        child: Center(child: SvgPicture.asset(Assets.svg.logo, width: 80.w)),
+        child: Center(child: SvgPicture.asset(Assets.svg.appLogo, width: 80.w)),
       ),
     );
   }

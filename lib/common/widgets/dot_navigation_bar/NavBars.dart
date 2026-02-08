@@ -1,5 +1,5 @@
 
-import 'package:story/common/widgets/dot_navigation_bar/DotNavigationBarItem.dart';
+import 'package:movie/common/widgets/dot_navigation_bar/DotNavigationBarItem.dart';
 
 import 'navigation_bar_content.dart';
 import 'package:flutter/material.dart';

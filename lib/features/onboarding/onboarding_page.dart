@@ -3,9 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:story/core/di/di.dart';
-import 'package:story/core/routers/app_router.dart';
-import 'package:story/features/auth/cubit/auth_cubit.dart';
+import 'package:movie/core/di/di.dart';
+import 'package:movie/core/routers/app_router.dart';
+import 'package:movie/features/auth/cubit/auth_cubit.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});

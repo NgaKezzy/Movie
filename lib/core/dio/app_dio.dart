@@ -1,11 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:dio_curl_logger/dio_curl_logger.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:story/core/dio/intercepter.dart';
-import 'package:story/main.dart';
+import 'package:movie/core/dio/interceptor.dart';
 
 abstract class AppNetworkModule {
-
   static Dio provideDio() {
     Dio dio = Dio(
       BaseOptions(
@@ -23,7 +21,6 @@ abstract class AppNetworkModule {
             false, // Set to false to disable logging of HTTP responses
       ),
     );
-  
 
     dio.interceptors.add(
       PrettyDioLogger(

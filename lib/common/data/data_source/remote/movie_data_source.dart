@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:story/common/domain/entities/request/keyword.dart';
-import 'package:story/common/domain/entities/request/limit_movie.dart';
-import 'package:story/common/domain/entities/request/page.dart';
-import 'package:story/common/domain/entities/response/movie_data.dart';
-import 'package:story/common/domain/entities/response/movie_info.dart';
-import 'package:story/common/domain/entities/response/movie_response.dart';
-import 'package:story/common/domain/entities/response/movie_search.dart';
-import 'package:story/core/constants/url_constants.dart';
+import 'package:movie/common/domain/entities/request/keyword.dart';
+import 'package:movie/common/domain/entities/request/limit_movie.dart';
+import 'package:movie/common/domain/entities/request/page.dart';
+import 'package:movie/common/domain/entities/response/movie_data.dart';
+import 'package:movie/common/domain/entities/response/movie_info.dart';
+import 'package:movie/common/domain/entities/response/movie_response.dart';
+import 'package:movie/common/domain/entities/response/movie_search.dart';
+import 'package:movie/core/constants/url_constants.dart';
 
 part 'movie_data_source.g.dart';
 

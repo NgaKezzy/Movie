@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:story/common/widgets/text_field/default_textfield.dart';
-import 'package:story/core/di/di.dart';
-import 'package:story/core/routers/app_router.dart';
-import 'package:story/core/text_style/app_text_style.dart';
-import 'package:story/features/auth/cubit/auth_cubit.dart';
+import 'package:movie/common/widgets/text_field/default_textfield.dart';
+import 'package:movie/core/di/di.dart';
+import 'package:movie/core/routers/app_router.dart';
+import 'package:movie/core/text_style/app_text_style.dart';
+import 'package:movie/features/auth/cubit/auth_cubit.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: AppTextStyles.textStyle14,
                 ),
                 Gap(30.h),
-                DefaultTextfield(
+                AppTextField(
                   controller: _usernameController,
                   isError: isErrorUsername,
                   heightContainer: 56,
@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   errorText: 'Vui lòng nhập tài khoản',
                 ),
                 Gap(16.h),
-                DefaultTextfield(
+                AppTextField(
                   controller: _passwordController,
                   isError: isErrorPass,
                   heightContainer: 56,

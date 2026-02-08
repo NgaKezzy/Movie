@@ -8,14 +8,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:floating/floating.dart';
 import 'package:gap/gap.dart';
-import 'package:story/common/domain/entities/response/movie_data.dart';
-import 'package:story/core/colors/app_colors.dart';
-import 'package:story/core/di/di.dart';
-import 'package:story/core/text_style/app_text_style.dart';
-import 'package:story/features/movie/cubit/movie_cubit.dart';
-import 'package:story/features/movie/cubit/movie_state.dart';
+import 'package:movie/common/domain/entities/response/movie_data.dart';
+import 'package:movie/core/colors/app_colors.dart';
+import 'package:movie/core/di/di.dart';
+import 'package:movie/core/text_style/app_text_style.dart';
+import 'package:movie/features/movie/cubit/movie_cubit.dart';
+import 'package:movie/features/movie/cubit/movie_state.dart';
 import 'package:video_player/video_player.dart';
-import 'package:story/core/language/l10n/app_localizations.dart';
+import 'package:movie/core/language/l10n/app_localizations.dart';
 
 class WatchMovieScreen extends StatefulWidget {
   const WatchMovieScreen({super.key, required this.movie});

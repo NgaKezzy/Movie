@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:story/core/colors/app_colors.dart';
-import 'package:story/core/text_style/app_text_style.dart';
+import 'package:movie/core/colors/app_colors.dart';
+import 'package:movie/core/text_style/app_text_style.dart';
 
-class DefaultTextfield extends StatelessWidget {
-  const DefaultTextfield({
+class AppTextField extends StatelessWidget {
+  const AppTextField({
     super.key,
     this.enabled = true,
     this.lableLeft,
@@ -212,9 +212,9 @@ class DefaultTextfield extends StatelessWidget {
                   fillColor: fillColor,
                   counterText: counterText,
                   floatingLabelBehavior: floatingLabelBehavior,
-                  // contentPadding:
-                  //     contentPadding ??
-                  //     EdgeInsets.symmetric(vertical: 10.w, horizontal: 16.w),
+                  contentPadding:
+                      contentPadding ??
+                      EdgeInsets.symmetric(vertical: 10.w, horizontal: 16.w),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(borderRadius ?? 8.r),
                     borderSide: BorderSide(

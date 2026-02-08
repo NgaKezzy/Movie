@@ -6,14 +6,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:story/common/domain/entities/response/movie_data.dart';
-import 'package:story/common/widgets/text_field/default_textfield.dart';
-import 'package:story/core/colors/app_colors.dart';
-import 'package:story/core/language/l10n/app_localizations.dart';
-import 'package:story/core/di/di.dart';
-import 'package:story/core/text_style/app_text_style.dart';
-import 'package:story/features/movie/cubit/movie_cubit.dart';
-import 'package:story/features/movie/cubit/movie_state.dart';
+import 'package:movie/common/domain/entities/response/movie_data.dart';
+import 'package:movie/common/widgets/text_field/default_textfield.dart';
+import 'package:movie/core/colors/app_colors.dart';
+import 'package:movie/core/gen/assets.gen.dart';
+import 'package:movie/core/language/l10n/app_localizations.dart';
+import 'package:movie/core/di/di.dart';
+import 'package:movie/core/text_style/app_text_style.dart';
+import 'package:movie/features/movie/cubit/movie_cubit.dart';
+import 'package:movie/features/movie/cubit/movie_state.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -54,31 +55,12 @@ class _SearchPageState extends State<SearchPage> {
           child: Row(
             children: [
               // Logo SVG hình tròn
-              Container(
-                padding: EdgeInsets.all(6.r),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.red5.withOpacity(0.3),
-                      blurRadius: 10,
-                      spreadRadius: 1,
-                    ),
-                  ],
-                ),
-                child: ClipOval(
-                  child: SvgPicture.asset(
-                    'assets/svg/logo.svg',
-                    height: 28.h,
-                    width: 28.w,
-                  ),
-                ),
-              ),
+              SvgPicture.asset(Assets.svg.appLogo, height: 28.h, width: 28.w),
               Gap(12.w),
               // Text tìm kiếm với gradient
               Expanded(
-                child: DefaultTextfield(
-                  heightContainer: 45,
+                child: AppTextField(
+                  heightContainer: 40,
                   controller: _searchController,
                   onChanged: (p0) {
                     if (_debounce?.isActive ?? false) {

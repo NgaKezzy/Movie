@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:cupertino_native/components/switch.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,16 +7,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
-import 'package:story/core/colors/app_colors.dart';
-import 'package:story/core/di/di.dart';
-import 'package:story/core/language/cubit/language_cubit.dart';
-import 'package:story/core/routers/app_router.dart';
-import 'package:story/core/text_style/app_text_style.dart';
-import 'package:story/core/theme/cubit/theme_cubit.dart';
-import 'package:story/core/theme/cubit/theme_state.dart';
-import 'package:story/core/language/l10n/app_localizations.dart';
-import 'package:story/features/auth/cubit/auth_cubit.dart';
+import 'package:movie/core/colors/app_colors.dart';
+import 'package:movie/core/di/di.dart';
+import 'package:movie/core/gen/assets.gen.dart';
+import 'package:movie/core/language/cubit/language_cubit.dart';
+import 'package:movie/core/text_style/app_text_style.dart';
+import 'package:movie/core/theme/cubit/theme_cubit.dart';
+import 'package:movie/core/theme/cubit/theme_state.dart';
+import 'package:movie/core/language/l10n/app_localizations.dart';
+import 'package:movie/features/auth/cubit/auth_cubit.dart';
 
 class SettingPage extends StatelessWidget {
   SettingPage({super.key});
@@ -40,26 +38,7 @@ class SettingPage extends StatelessWidget {
           child: Row(
             children: [
               // Logo SVG hình tròn
-              Container(
-                padding: EdgeInsets.all(6.r),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.red5.withOpacity(0.3),
-                      blurRadius: 10,
-                      spreadRadius: 1,
-                    ),
-                  ],
-                ),
-                child: ClipOval(
-                  child: SvgPicture.asset(
-                    'assets/svg/logo.svg',
-                    height: 28.h,
-                    width: 28.w,
-                  ),
-                ),
-              ),
+              SvgPicture.asset(Assets.svg.appLogo, height: 28.h, width: 28.w),
               Gap(12.w),
               // Text cài đặt với gradient
               ShaderMask(

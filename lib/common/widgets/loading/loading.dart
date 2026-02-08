@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:overlay_support/overlay_support.dart';
-import 'package:story/core/colors/app_colors.dart';
+import 'package:movie/core/colors/app_colors.dart';
 
 class Loading {
   static final Loading _singleton = Loading._internal();

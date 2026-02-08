@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Main gradient background -->
+    <linearGradient id="mainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#667eea"/>
+      <stop offset="50%" stop-color="#764ba2"/>
+      <stop offset="100%" stop-color="#f093fb"/>
+    </linearGradient>
+    
+    <!-- Play button gradient -->
+    <linearGradient id="playGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f0f0f0"/>
+    </linearGradient>
+    
+    <!-- Glow effect -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    
+    <!-- Drop shadow -->
+    <filter id="dropShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+    
+    <!-- Inner shadow for depth -->
+    <filter id="innerGlow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
+      <feOffset in="blur" dx="0" dy="2" result="offsetBlur"/>
+      <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+    </filter>
+  </defs>
+  
+  <!-- Background rounded square -->
+  <rect x="32" y="32" width="448" height="448" rx="100" ry="100" fill="url(#mainGrad)" filter="url(#dropShadow)"/>
+  
+  <!-- Film reel outer circle -->
+  <circle cx="256" cy="256" r="160" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="24"/>
+  
+  <!-- Film reel inner decorative circles -->
+  <circle cx="256" cy="256" r="130" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+  <circle cx="256" cy="256" r="100" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+  
+  <!-- Film strip holes around the circle -->
+  <g fill="rgba(255,255,255,0.2)">
+    <circle cx="256" cy="96" r="12"/>
+    <circle cx="369" cy="143" r="12"/>
+    <circle cx="416" cy="256" r="12"/>
+    <circle cx="369" cy="369" r="12"/>
+    <circle cx="256" cy="416" r="12"/>
+    <circle cx="143" cy="369" r="12"/>
+    <circle cx="96" cy="256" r="12"/>
+    <circle cx="143" cy="143" r="12"/>
+  </g>
+  
+  <!-- Center play button background -->
+  <circle cx="256" cy="256" r="72" fill="rgba(255,255,255,0.95)" filter="url(#innerGlow)"/>
+  
+  <!-- Play triangle -->
+  <path d="M232 208 L232 304 L304 256 Z" fill="url(#mainGrad)"/>
+  
+  <!-- Decorative film frame corners -->
+  <g stroke="rgba(255,255,255,0.3)" stroke-width="3" fill="none">
+    <!-- Top left corner -->
+    <path d="M80 120 L80 80 L120 80"/>
+    <!-- Top right corner -->
+    <path d="M392 80 L432 80 L432 120"/>
+    <!-- Bottom right corner -->
+    <path d="M432 392 L432 432 L392 432"/>
+    <!-- Bottom left corner -->
+    <path d="M120 432 L80 432 L80 392"/>
+  </g>
+  
+  <!-- Small sparkle effects -->
+  <g fill="#ffffff" opacity="0.6">
+    <circle cx="380" cy="100" r="4"/>
+    <circle cx="400" cy="120" r="2"/>
+    <circle cx="120" cy="400" r="3"/>
+  </g>
+</svg>

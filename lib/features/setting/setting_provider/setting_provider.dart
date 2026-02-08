@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:story/core/di/di.dart';
-import 'package:story/features/auth/cubit/auth_cubit.dart';
-import 'package:story/features/setting/setting_page.dart';
+import 'package:movie/core/di/di.dart';
+import 'package:movie/features/auth/cubit/auth_cubit.dart';
+import 'package:movie/features/setting/setting_page.dart';
 
 class SettingProvider extends StatelessWidget {
   const SettingProvider({super.key});

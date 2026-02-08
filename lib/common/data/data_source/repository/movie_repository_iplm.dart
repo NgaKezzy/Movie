@@ -1,17 +1,17 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:logger/web.dart';
-import 'package:story/common/data/data_source/remote/movie_data_source.dart';
-import 'package:story/common/domain/entities/request/keyword.dart';
-import 'package:story/common/domain/entities/request/limit_movie.dart';
-import 'package:story/common/domain/entities/request/page.dart';
-import 'package:story/common/domain/entities/response/failure.dart';
-import 'package:story/common/domain/entities/response/movie_data.dart';
-import 'package:story/common/domain/entities/response/movie_info.dart';
-import 'package:story/common/domain/entities/response/movie_response.dart';
-import 'package:story/common/domain/entities/response/movie_search.dart';
-import 'package:story/common/domain/repository/movie_repository.dart';
-import 'package:story/core/di/di.dart';
+import 'package:movie/common/data/data_source/remote/movie_data_source.dart';
+import 'package:movie/common/domain/entities/request/keyword.dart';
+import 'package:movie/common/domain/entities/request/limit_movie.dart';
+import 'package:movie/common/domain/entities/request/page.dart';
+import 'package:movie/common/domain/entities/response/failure.dart';
+import 'package:movie/common/domain/entities/response/movie_data.dart';
+import 'package:movie/common/domain/entities/response/movie_info.dart';
+import 'package:movie/common/domain/entities/response/movie_response.dart';
+import 'package:movie/common/domain/entities/response/movie_search.dart';
+import 'package:movie/common/domain/repository/movie_repository.dart';
+import 'package:movie/core/di/di.dart';
 
 class MovieRepositoryImpl implements MovieRepository {
   final MovieDataSource movieDataSource;

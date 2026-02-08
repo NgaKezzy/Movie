@@ -2,15 +2,15 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
-import 'package:story/common/data/data_source/local/local_storage.dart';
-import 'package:story/common/data/data_source/remote/movie_data_source.dart';
-import 'package:story/common/data/data_source/repository/movie_repository_iplm.dart';
-import 'package:story/core/dio/app_dio.dart';
-import 'package:story/core/language/cubit/language_cubit.dart';
-import 'package:story/core/logger/app_logger.dart';
-import 'package:story/core/theme/cubit/theme_cubit.dart';
-import 'package:story/features/auth/cubit/auth_cubit.dart';
-import 'package:story/features/movie/cubit/movie_cubit.dart';
+import 'package:movie/common/data/data_source/local/local_storage.dart';
+import 'package:movie/common/data/data_source/remote/movie_data_source.dart';
+import 'package:movie/common/data/data_source/repository/movie_repository_iplm.dart';
+import 'package:movie/core/dio/app_dio.dart';
+import 'package:movie/core/language/cubit/language_cubit.dart';
+import 'package:movie/core/logger/app_logger.dart';
+import 'package:movie/core/theme/cubit/theme_cubit.dart';
+import 'package:movie/features/auth/cubit/auth_cubit.dart';
+import 'package:movie/features/movie/cubit/movie_cubit.dart';
 
 final getIt = GetIt.instance;
 

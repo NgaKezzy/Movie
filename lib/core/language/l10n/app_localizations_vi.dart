@@ -88,4 +88,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get noDataAvailable => 'Không có dữ liệu!';
+
+  @override
+  String get searchNotFound => 'Không tìm thấy phim nào';
 }

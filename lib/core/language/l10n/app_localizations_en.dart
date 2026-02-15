@@ -88,4 +88,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noDataAvailable => 'No data available!';
+
+  @override
+  String get searchNotFound => 'No movies found';
 }

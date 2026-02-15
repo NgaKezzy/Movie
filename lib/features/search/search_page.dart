@@ -98,15 +98,38 @@ class _SearchPageState extends State<SearchPage> {
                 child: BlocBuilder<MovieCubit, MovieState>(
                   builder: (context, state) {
                     final movieSearchList = state.movieSearchList ?? [];
-                    return state.movieSearchList.isEmpty
-                        ? SizedBox()
-                        : ListView.separated(
-                            itemBuilder: (context, index) {
-                              return _buildMovie(state.movieSearchList[index]);
-                            },
-                            separatorBuilder: (context, index) => Gap(10),
-                            itemCount: movieSearchList.length,
-                          );
+                    if (movieSearchList.isEmpty) {
+                      if (_searchController.text.trim().isEmpty) {
+                        return SizedBox();
+                      }
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.search_off_rounded,
+                              size: 64.sp,
+                              color: AppColors.red5.withOpacity(0.5),
+                            ),
+                            Gap(16.h),
+                            Text(
+                              language?.searchNotFound ??
+                                  'Không tìm thấy phim nào',
+                              style: AppTextStyles.textStyle14.copyWith(
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+                    return ListView.separated(
+                      itemBuilder: (context, index) {
+                        return _buildMovie(movieSearchList[index]);
+                      },
+                      separatorBuilder: (context, index) => Gap(10),
+                      itemCount: movieSearchList.length,
+                    );
                   },
                 ),
               ),

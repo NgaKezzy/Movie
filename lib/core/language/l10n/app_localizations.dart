@@ -259,6 +259,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No data available!'**
   String get noDataAvailable;
+
+  /// No description provided for @searchNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No movies found'**
+  String get searchNotFound;
 }
 
 class _AppLocalizationsDelegate

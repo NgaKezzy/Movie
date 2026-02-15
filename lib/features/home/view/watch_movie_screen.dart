@@ -37,11 +37,43 @@ class _WatchMovieScreenState extends State<WatchMovieScreen> {
   final Floating _floating = Floating();
   bool _isPipAvailable = false;
 
+  // iOS PiP Method Channel
+  static final MethodChannel _pipChannel = MethodChannel('com.movie/pip');
+
   @override
   void initState() {
     super.initState();
     initData();
     _checkPipAvailability();
+    if (Platform.isIOS) _setupPipCallbacks();
+  }
+
+  /// Listen for native iOS PiP events (restore / stopped)
+  void _setupPipCallbacks() {
+    _pipChannel.setMethodCallHandler((call) async {
+      switch (call.method) {
+        case 'onPipRestore':
+          // User tapped expand button on PiP window
+          final args = call.arguments as Map<dynamic, dynamic>?;
+          final position = args?['position'] as int? ?? 0;
+          print('iOS PiP restore at position: ${position}s');
+          // Seek Flutter player to PiP position and resume
+          await _videoPlayerController?.seekTo(Duration(seconds: position));
+          await _videoPlayerController?.play();
+          if (mounted) setState(() {});
+          break;
+        case 'onPipStopped':
+          // PiP was dismissed (swipe away / close)
+          final args = call.arguments as Map<dynamic, dynamic>?;
+          final position = args?['position'] as int? ?? 0;
+          print('iOS PiP stopped at position: ${position}s');
+          // Resume Flutter player at PiP position
+          await _videoPlayerController?.seekTo(Duration(seconds: position));
+          await _videoPlayerController?.play();
+          if (mounted) setState(() {});
+          break;
+      }
+    });
   }
 
   Future<void> initData() async {
@@ -66,6 +98,18 @@ class _WatchMovieScreenState extends State<WatchMovieScreen> {
       setState(() {
         _isPipAvailable = status;
       });
+    } else if (Platform.isIOS) {
+      try {
+        final status = await _pipChannel.invokeMethod<bool>('isPipAvailable');
+        setState(() {
+          _isPipAvailable = status ?? false;
+        });
+      } catch (e) {
+        print('iOS PiP check failed: $e');
+        setState(() {
+          _isPipAvailable = false;
+        });
+      }
     }
   }
 
@@ -75,6 +119,18 @@ class _WatchMovieScreenState extends State<WatchMovieScreen> {
         ImmediatePiP(aspectRatio: Rational.landscape()),
       );
       print('PiP enabled: $status');
+    } else if (Platform.isIOS && _isPipAvailable) {
+      try {
+        final position = _videoPlayerController?.value.position.inSeconds ?? 0;
+        // Pause Flutter player first
+        await _videoPlayerController?.pause();
+        await _pipChannel.invokeMethod('enablePip', {'position': position});
+        print('iOS PiP enabled');
+      } catch (e) {
+        print('iOS PiP failed: $e');
+        // Resume Flutter player if PiP failed
+        _videoPlayerController?.play();
+      }
     }
   }
 
@@ -143,6 +199,13 @@ class _WatchMovieScreenState extends State<WatchMovieScreen> {
 
     setState(() {});
 
+    // Pre-create PiP controller for iOS (so PiP button starts instantly)
+    if (Platform.isIOS && _isPipAvailable) {
+      _pipChannel
+          .invokeMethod('preparePip', {'url': linkVideo})
+          .catchError((e) => print('iOS preparePip failed: $e'));
+    }
+
     timer = Timer.periodic(Duration(seconds: 10), (_) {
       final current = _videoPlayerController?.value.position;
       if (current != null) {
@@ -181,6 +244,10 @@ class _WatchMovieScreenState extends State<WatchMovieScreen> {
   @override
   void dispose() {
     timer?.cancel();
+    // Full cleanup iOS PiP
+    if (Platform.isIOS) {
+      _pipChannel.invokeMethod('disposePip').catchError((_) {});
+    }
     _videoPlayerController?.removeListener(_videoListener);
     _videoPlayerController?.dispose();
     _chewieController?.dispose();

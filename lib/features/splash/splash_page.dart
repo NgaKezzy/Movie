@@ -23,7 +23,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     movieCubit.clearData();
 
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 2), () {
       context.go(AppRouteConstant.myHomePage);
     });
   }

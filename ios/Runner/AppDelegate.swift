@@ -288,14 +288,12 @@ extension AppDelegate: AVPictureInPictureControllerDelegate {
     
     func pictureInPictureControllerWillStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
         print("[PiP] Will start")
+        // Minimize app immediately as PiP begins — feels simultaneous
+        minimizeApp()
     }
     
     func pictureInPictureControllerDidStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
         print("[PiP] Did start ✅")
-        // Minimize app to background
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
-            self?.minimizeApp()
-        }
     }
     
     func pictureInPictureControllerDidStopPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {

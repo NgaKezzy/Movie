@@ -163,6 +163,11 @@ class _WatchMovieScreenState extends State<WatchMovieScreen> {
       await Future.delayed(const Duration(milliseconds: 500));
     }
 
+    // Save old references before nulling
+    final oldChewie = _chewieController;
+    final oldVideoPlayer = _videoPlayerController;
+
+    // Remove widget from tree first
     setState(() {
       _chewieController = null;
     });
@@ -170,10 +175,14 @@ class _WatchMovieScreenState extends State<WatchMovieScreen> {
     _hasCalledVideoEnd = false; // ← reset tại đây!
     currentIndex = index;
 
-    _videoPlayerController?.removeListener(_videoListener);
-    _videoPlayerController?.pause();
-    await _videoPlayerController?.dispose();
-    _chewieController?.dispose();
+    // Dispose old controllers
+    oldVideoPlayer?.removeListener(_videoListener);
+    oldVideoPlayer?.pause();
+    oldChewie?.dispose();
+    await oldVideoPlayer?.dispose();
+
+    // Wait for platform view to be fully cleaned up
+    await Future.delayed(const Duration(milliseconds: 100));
 
     _videoPlayerController = VideoPlayerController.networkUrl(
       Uri.parse(linkVideo),
@@ -249,8 +258,8 @@ class _WatchMovieScreenState extends State<WatchMovieScreen> {
       _pipChannel.invokeMethod('disposePip').catchError((_) {});
     }
     _videoPlayerController?.removeListener(_videoListener);
-    _videoPlayerController?.dispose();
     _chewieController?.dispose();
+    _videoPlayerController?.dispose();
     super.dispose();
   }
 

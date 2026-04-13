@@ -35,10 +35,6 @@ class AppRouteConstant {
   static const String watchMovie = '/watch-movie';
   // static const String movieHistory = '/movie-history';
   static const String movieListPage = '/movie-list-page';
-
-  // Nested Key
-  static final GlobalKey<NavigatorState> navigatorKey =
-      GlobalKey<NavigatorState>();
 }
 
 class AppRoutes {
@@ -53,9 +49,10 @@ class AppRoutes {
   /// Khai báo các màn hình mới tại đây
   GoRouter router = GoRouter(
     initialLocation: AppRouteConstant.initial,
-    navigatorKey: AppRouteConstant.navigatorKey,
+    navigatorKey: _rootNavigatorKey,
     routes: <RouteBase>[
       ShellRoute(
+        navigatorKey: _shellNavigatorKey,
         builder: (context, state, child) => MyHomePage(child: child),
         routes: [
           GoRoute(

@@ -7,10 +7,6 @@ import 'package:go_router/go_router.dart';
 import 'package:movie/core/language/l10n/app_localizations.dart';
 import 'package:movie/common/widgets/dot_navigation_bar/DotNavigationBarItem.dart';
 import 'package:movie/common/widgets/dot_navigation_bar/NavBars.dart';
-import 'package:movie/features/home/home_provider/home_provider.dart';
-import 'package:movie/features/search/search_provider/search_provider.dart';
-import 'package:movie/features/setting/setting_provider/movie_history_provider.dart';
-import 'package:movie/features/setting/setting_provider/setting_provider.dart';
 import 'package:movie/routers/app_router.dart';
 
 class MyHomePage extends StatefulWidget {

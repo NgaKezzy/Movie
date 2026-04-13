@@ -7,7 +7,7 @@ import 'package:movie/common/domain/entities/response/user_data.dart';
 import 'package:movie/common/widgets/text_field/default_textfield.dart';
 import 'package:movie/core/colors/app_colors.dart';
 import 'package:movie/core/di/di.dart';
-import 'package:movie/core/routers/app_router.dart';
+import 'package:movie/routers/app_router.dart';
 import 'package:movie/features/auth/cubit/auth_cubit.dart';
 
 class RegisterScreen extends StatefulWidget {

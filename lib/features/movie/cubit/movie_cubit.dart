@@ -9,7 +9,7 @@ import 'package:movie/common/domain/entities/request/limit_movie.dart';
 import 'package:movie/common/domain/entities/request/page.dart';
 import 'package:movie/common/domain/entities/response/movie_data.dart';
 import 'package:movie/core/di/di.dart';
-import 'package:movie/core/routers/app_router.dart';
+import 'package:movie/routers/app_router.dart';
 import 'package:movie/features/movie/cubit/movie_state.dart';
 
 class MovieCubit extends HydratedCubit<MovieState> {

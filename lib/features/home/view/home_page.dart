@@ -13,7 +13,7 @@ import 'package:movie/common/domain/entities/response/movie_data.dart';
 import 'package:movie/common/widgets/loading/loading_component.dart';
 import 'package:movie/core/colors/app_colors.dart';
 import 'package:movie/core/di/di.dart';
-import 'package:movie/core/routers/app_router.dart';
+import 'package:movie/routers/app_router.dart';
 import 'package:movie/core/text_style/app_text_style.dart';
 import 'package:movie/features/home/models/param_movie_list_page.dart';
 import 'package:movie/features/movie/cubit/movie_cubit.dart';

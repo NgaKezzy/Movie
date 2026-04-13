@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:movie/core/di/di.dart';
-import 'package:movie/core/routers/app_router.dart';
+import 'package:movie/routers/app_router.dart';
 import 'package:movie/features/auth/cubit/auth_cubit.dart';
 
 class OnboardingPage extends StatefulWidget {

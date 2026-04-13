@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie/common/widgets/text_field/default_textfield.dart';
 import 'package:movie/core/di/di.dart';
-import 'package:movie/core/routers/app_router.dart';
+import 'package:movie/routers/app_router.dart';
 import 'package:movie/core/text_style/app_text_style.dart';
 import 'package:movie/features/auth/cubit/auth_cubit.dart';
 

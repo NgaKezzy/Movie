@@ -6,7 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie/core/di/di.dart';
 import 'package:movie/core/gen/assets.gen.dart';
-import 'package:movie/core/routers/app_router.dart';
+import 'package:movie/routers/app_router.dart';
 import 'package:movie/features/movie/cubit/movie_cubit.dart';
 
 class SplashPage extends StatefulWidget {
@@ -24,7 +24,7 @@ class _SplashPageState extends State<SplashPage> {
     movieCubit.clearData();
 
     Timer(const Duration(milliseconds: 1500), () {
-      context.go(AppRouteConstant.myHomePage);
+      context.go(AppRouteConstant.homePage);
     });
   }
 

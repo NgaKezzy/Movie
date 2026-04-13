@@ -8,7 +8,7 @@ import 'package:overlay_support/overlay_support.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:movie/core/di/di.dart';
 import 'package:movie/core/language/cubit/language_cubit.dart';
-import 'package:movie/core/routers/app_router.dart';
+import 'package:movie/routers/app_router.dart';
 import 'package:movie/core/theme/cubit/theme_cubit.dart';
 import 'package:toastification/toastification.dart';
 import 'package:movie/core/language/l10n/app_localizations.dart';

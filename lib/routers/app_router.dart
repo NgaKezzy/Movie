@@ -20,8 +20,8 @@ import 'package:movie/features/splash/splash_page.dart';
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
-class AppRouteConstant {
-  AppRouteConstant._();
+class RouteName {
+  RouteName._();
 
   static const String initial = '/';
   static const String onboardingPage = '/onboarding-page';
@@ -39,16 +39,14 @@ class AppRouteConstant {
 
 class AppRoutes {
   static final AppRoutes _singleton = AppRoutes._internal();
-
   factory AppRoutes() {
     return _singleton;
   }
-
   AppRoutes._internal();
 
   /// Khai báo các màn hình mới tại đây
   GoRouter router = GoRouter(
-    initialLocation: AppRouteConstant.initial,
+    initialLocation: RouteName.initial,
     navigatorKey: _rootNavigatorKey,
     routes: <RouteBase>[
       ShellRoute(
@@ -56,7 +54,7 @@ class AppRoutes {
         builder: (context, state, child) => MyHomePage(child: child),
         routes: [
           GoRoute(
-            path: AppRouteConstant.homePage,
+            path: RouteName.homePage,
             pageBuilder: (context, state) => NoTransitionPage(
               child: BlocProvider.value(
                 value: getIt.get<MovieCubit>(),
@@ -66,7 +64,7 @@ class AppRoutes {
           ),
 
           GoRoute(
-            path: AppRouteConstant.searchPage,
+            path: RouteName.searchPage,
             pageBuilder: (context, state) => NoTransitionPage(
               child: BlocProvider.value(
                 value: getIt.get<MovieCubit>(),
@@ -76,7 +74,7 @@ class AppRoutes {
           ),
 
           GoRoute(
-            path: AppRouteConstant.movieHistoryPage,
+            path: RouteName.movieHistoryPage,
             pageBuilder: (context, state) => NoTransitionPage(
               child: BlocProvider.value(
                 value: getIt.get<MovieCubit>(),
@@ -86,7 +84,7 @@ class AppRoutes {
           ),
 
           GoRoute(
-            path: AppRouteConstant.settingPage,
+            path: RouteName.settingPage,
             pageBuilder: (context, state) => NoTransitionPage(
               child: BlocProvider.value(
                 value: getIt.get<AuthCubit>(),
@@ -97,7 +95,7 @@ class AppRoutes {
         ],
       ),
       GoRoute(
-        path: AppRouteConstant.initial,
+        path: RouteName.initial,
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider.value(
             value: getIt.get<AuthCubit>(),
@@ -107,7 +105,7 @@ class AppRoutes {
         },
       ),
       GoRoute(
-        path: AppRouteConstant.loginScreen,
+        path: RouteName.loginScreen,
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider.value(
             value: getIt.get<AuthCubit>(),
@@ -116,7 +114,7 @@ class AppRoutes {
         },
       ),
       GoRoute(
-        path: AppRouteConstant.register,
+        path: RouteName.register,
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider.value(
             value: getIt.get<AuthCubit>(),
@@ -126,7 +124,7 @@ class AppRoutes {
       ),
 
       GoRoute(
-        path: AppRouteConstant.watchMovie,
+        path: RouteName.watchMovie,
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider.value(
             value: getIt.get<MovieCubit>(),
@@ -138,7 +136,7 @@ class AppRoutes {
       ),
 
       GoRoute(
-        path: AppRouteConstant.movieListPage,
+        path: RouteName.movieListPage,
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider.value(
             value: getIt.get<MovieCubit>(),

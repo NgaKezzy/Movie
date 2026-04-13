@@ -111,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         );
                         if (response) {
                           authCubit.setIsLogin(true);
-                          context.go(AppRouteConstant.myHomePage);
+                          context.go(RouteName.myHomePage);
                         } else {
                           showOkAlertDialog(
                             context: context,
@@ -157,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        context.push(AppRouteConstant.register);
+                        context.push(RouteName.register);
                       },
                       child: Text(
                         ' Đăng ký',

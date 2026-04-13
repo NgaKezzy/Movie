@@ -129,7 +129,7 @@ class MovieCubit extends HydratedCubit<MovieState> {
       }
     }
     await addToHistory(movie);
-    context.push(AppRouteConstant.watchMovie, extra: movie);
+    context.push(RouteName.watchMovie, extra: movie);
   }
 
   Future<void> addToHistory(Movie movie) async {

@@ -134,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                       IconButton(
                         onPressed: () {
                           context.push(
-                            AppRouteConstant.movieListPage,
+                            RouteName.movieListPage,
                             extra: ParamMovieListPage(
                               movies: movies,
                               title: title,
@@ -296,7 +296,7 @@ class _HomePageState extends State<HomePage> {
                       IconButton(
                         onPressed: () {
                           context.push(
-                            AppRouteConstant.movieListPage,
+                            RouteName.movieListPage,
                             extra: ParamMovieListPage(
                               movies: state.movieCartoon,
                               title: title,

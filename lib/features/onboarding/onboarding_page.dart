@@ -40,9 +40,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
         isLast: true,
         onTap: () {
           if (authCubit.state.isLogin) {
-            context.go(AppRouteConstant.myHomePage);
+            context.go(RouteName.myHomePage);
           } else {
-            context.go(AppRouteConstant.loginScreen);
+            context.go(RouteName.loginScreen);
           }
           print("Đi tới màn hình chính");
         },

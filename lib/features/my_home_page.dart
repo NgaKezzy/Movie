@@ -19,26 +19,26 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _getIndex(String location) {
-    if (location.startsWith(AppRouteConstant.homePage)) return 0;
-    if (location.startsWith(AppRouteConstant.searchPage)) return 1;
-    if (location.startsWith(AppRouteConstant.movieHistoryPage)) return 2;
-    if (location.startsWith(AppRouteConstant.settingPage)) return 3;
+    if (location.startsWith(RouteName.homePage)) return 0;
+    if (location.startsWith(RouteName.searchPage)) return 1;
+    if (location.startsWith(RouteName.movieHistoryPage)) return 2;
+    if (location.startsWith(RouteName.settingPage)) return 3;
     return 0;
   }
 
   void onTap(int index, BuildContext context) {
     switch (index) {
       case 0:
-        context.go(AppRouteConstant.homePage);
+        context.go(RouteName.homePage);
         break;
       case 1:
-        context.go(AppRouteConstant.searchPage);
+        context.go(RouteName.searchPage);
         break;
       case 2:
-        context.go(AppRouteConstant.movieHistoryPage);
+        context.go(RouteName.movieHistoryPage);
         break;
       case 3:
-        context.go(AppRouteConstant.settingPage);
+        context.go(RouteName.settingPage);
         break;
     }
   }

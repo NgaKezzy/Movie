@@ -160,7 +160,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           message: 'Đăng ký thành công!',
                           onPopInvokedWithResult: (didPop, result) {
                             Future.microtask(() {
-                              context.go(AppRouteConstant.loginScreen);
+                              context.go(RouteName.loginScreen);
                             });
                           },
                         );
@@ -208,7 +208,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      context.go(AppRouteConstant.loginScreen);
+                      context.go(RouteName.loginScreen);
                     },
                     child: Text(
                       ' Đăng nhập',

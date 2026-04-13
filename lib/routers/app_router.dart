@@ -57,39 +57,42 @@ class AppRoutes {
         routes: [
           GoRoute(
             path: AppRouteConstant.homePage,
-            builder: (BuildContext context, GoRouterState state) {
-              return BlocProvider.value(
+            pageBuilder: (context, state) => NoTransitionPage(
+              child: BlocProvider.value(
                 value: getIt.get<MovieCubit>(),
                 child: HomePage(),
-              );
-            },
+              ),
+            ),
           ),
+
           GoRoute(
             path: AppRouteConstant.searchPage,
-            builder: (BuildContext context, GoRouterState state) {
-              return BlocProvider.value(
+            pageBuilder: (context, state) => NoTransitionPage(
+              child: BlocProvider.value(
                 value: getIt.get<MovieCubit>(),
                 child: SearchPage(),
-              );
-            },
+              ),
+            ),
           ),
+
           GoRoute(
             path: AppRouteConstant.movieHistoryPage,
-            builder: (BuildContext context, GoRouterState state) {
-              return BlocProvider.value(
+            pageBuilder: (context, state) => NoTransitionPage(
+              child: BlocProvider.value(
                 value: getIt.get<MovieCubit>(),
                 child: MovieHistoryPage(),
-              );
-            },
+              ),
+            ),
           ),
+
           GoRoute(
             path: AppRouteConstant.settingPage,
-            builder: (BuildContext context, GoRouterState state) {
-              return BlocProvider.value(
+            pageBuilder: (context, state) => NoTransitionPage(
+              child: BlocProvider.value(
                 value: getIt.get<AuthCubit>(),
                 child: SettingPage(),
-              );
-            },
+              ),
+            ),
           ),
         ],
       ),

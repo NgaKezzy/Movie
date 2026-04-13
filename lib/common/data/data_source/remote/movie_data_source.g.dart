@@ -41,7 +41,7 @@ class _MovieDataSource implements MovieDataSource {
     try {
       _value = MovieData.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;
@@ -68,7 +68,7 @@ class _MovieDataSource implements MovieDataSource {
     try {
       _value = MovieInfo.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;
@@ -96,7 +96,7 @@ class _MovieDataSource implements MovieDataSource {
     try {
       _value = MovieSearch.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;
@@ -124,7 +124,7 @@ class _MovieDataSource implements MovieDataSource {
     try {
       _value = MovieResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;
@@ -152,7 +152,7 @@ class _MovieDataSource implements MovieDataSource {
     try {
       _value = MovieResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;
@@ -180,7 +180,7 @@ class _MovieDataSource implements MovieDataSource {
     try {
       _value = MovieResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, _result);
+      errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
     }
     return _value;

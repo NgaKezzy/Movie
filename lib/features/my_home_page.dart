@@ -54,6 +54,8 @@ class _MyHomePageState extends State<MyHomePage> {
     if (Platform.isIOS) {
       return // Overlay this at the bottom of your page
       CNTabBar(
+        rightCount: 1,
+        split: true,
         items: [
           CNTabBarItem(label: language?.home, icon: CNSymbol('house.fill')),
           CNTabBarItem(

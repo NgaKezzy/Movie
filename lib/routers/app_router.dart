@@ -49,48 +49,61 @@ class AppRoutes {
     initialLocation: RouteName.initial,
     navigatorKey: _rootNavigatorKey,
     routes: <RouteBase>[
-      ShellRoute(
-        navigatorKey: _shellNavigatorKey,
-        builder: (context, state, child) => MyHomePage(child: child),
-        routes: [
-          GoRoute(
-            path: RouteName.homePage,
-            pageBuilder: (context, state) => NoTransitionPage(
-              child: BlocProvider.value(
-                value: getIt.get<MovieCubit>(),
-                child: HomePage(),
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) =>
+            MyHomePage(shell: navigationShell),
+        branches: [
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: RouteName.homePage,
+                pageBuilder: (context, state) => NoTransitionPage(
+                  child: BlocProvider.value(
+                    value: getIt.get<MovieCubit>(),
+                    child: HomePage(),
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
-
-          GoRoute(
-            path: RouteName.searchPage,
-            pageBuilder: (context, state) => NoTransitionPage(
-              child: BlocProvider.value(
-                value: getIt.get<MovieCubit>(),
-                child: SearchPage(),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: RouteName.searchPage,
+                pageBuilder: (context, state) => NoTransitionPage(
+                  child: BlocProvider.value(
+                    value: getIt.get<MovieCubit>(),
+                    child: SearchPage(),
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
-
-          GoRoute(
-            path: RouteName.movieHistoryPage,
-            pageBuilder: (context, state) => NoTransitionPage(
-              child: BlocProvider.value(
-                value: getIt.get<MovieCubit>(),
-                child: MovieHistoryPage(),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: RouteName.movieHistoryPage,
+                pageBuilder: (context, state) => NoTransitionPage(
+                  child: BlocProvider.value(
+                    value: getIt.get<MovieCubit>(),
+                    child: MovieHistoryPage(),
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
-
-          GoRoute(
-            path: RouteName.settingPage,
-            pageBuilder: (context, state) => NoTransitionPage(
-              child: BlocProvider.value(
-                value: getIt.get<AuthCubit>(),
-                child: SettingPage(),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: RouteName.settingPage,
+                pageBuilder: (context, state) => NoTransitionPage(
+                  child: BlocProvider.value(
+                    value: getIt.get<AuthCubit>(),
+                    child: SettingPage(),
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
         ],
       ),

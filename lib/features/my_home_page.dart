@@ -7,49 +7,23 @@ import 'package:go_router/go_router.dart';
 import 'package:movie/core/language/l10n/app_localizations.dart';
 import 'package:movie/common/widgets/dot_navigation_bar/DotNavigationBarItem.dart';
 import 'package:movie/common/widgets/dot_navigation_bar/NavBars.dart';
-import 'package:movie/routers/app_router.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.child});
-  final Widget child;
+  const MyHomePage({super.key, required this.shell});
+  final StatefulNavigationShell shell;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _getIndex(String location) {
-    if (location.startsWith(RouteName.homePage)) return 0;
-    if (location.startsWith(RouteName.searchPage)) return 1;
-    if (location.startsWith(RouteName.movieHistoryPage)) return 2;
-    if (location.startsWith(RouteName.settingPage)) return 3;
-    return 0;
-  }
-
-  void onTap(int index, BuildContext context) {
-    switch (index) {
-      case 0:
-        context.go(RouteName.homePage);
-        break;
-      case 1:
-        context.go(RouteName.searchPage);
-        break;
-      case 2:
-        context.go(RouteName.movieHistoryPage);
-        break;
-      case 3:
-        context.go(RouteName.settingPage);
-        break;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final String location = GoRouterState.of(context).uri.toString();
     return PopScope(
       canPop: true,
       child: Scaffold(
-        body: widget.child,
+        body: widget.shell,
         extendBodyBehindAppBar: true,
         extendBody: true,
         bottomNavigationBar: _buildBottomNavigationBar(context, location),
@@ -78,9 +52,9 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: CNSymbol('gearshape.fill'),
           ),
         ],
-        currentIndex: _getIndex(location),
-        onTap: (value) {
-          onTap(value, context);
+        currentIndex: widget.shell.currentIndex,
+        onTap: (index) {
+          widget.shell.goBranch(index);
         },
       );
     } else {
@@ -91,9 +65,9 @@ class _MyHomePageState extends State<MyHomePage> {
         paddingR: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         enablePaddingAnimation: false,
         dotIndicatorColor: Colors.transparent,
-        currentIndex: _getIndex(location),
+        currentIndex: widget.shell.currentIndex,
         onTap: (index) {
-          onTap(index, context);
+          widget.shell.goBranch(index);
         },
         items: [
           DotNavigationBarItem(
